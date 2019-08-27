@@ -20,11 +20,11 @@
 %########################################################################
 %with(%
 %include_path,%(%else-then(%include_path%,%(%filepath(%input%)%)%)%)%,%
-%depends,%(%else-then(%depends%,%(depend)%)%)%,%
+%depends,%(%else-then(%depends%,%()%)%)%,%
 %Depends,%(%else-then(%Depends%,%(%depends%)%)%)%,%
 %DEPENDS,%(%else-then(%DEPENDS%,%(%toupper(%Depends%)%)%)%)%,%
 %depends,%(%else-then(%_Depends%,%(%tolower(%Depends%)%)%)%)%,%
-%depend,%(%else-then(%depend%,%(%else-then(%right(%Depends%,;)%,%(%Depends%)%)%)%)%)%,%
+%depend,%(%else-then(%depend%,%(%else-then(%right(%Depends%,;)%,%(%else-then(%Depends%,%(%Framework%)%)%)%)%)%)%)%,%
 %Depend,%(%else-then(%Depend%,%(%depend%)%)%)%,%
 %DEPEND,%(%else-then(%DEPEND%,%(%toupper(%Depend%)%)%)%)%,%
 %depend,%(%else-then(%_Depend%,%(%tolower(%Depend%)%)%)%)%,%
@@ -32,7 +32,7 @@
 %File,%(%else-then(%File%,%(%file%)%)%)%,%
 %FILE,%(%else-then(%FILE%,%(%toupper(%File%)%)%)%)%,%
 %file,%(%else-then(%_File%,%(%tolower(%File%)%)%)%)%,%
-%target,%(%else-then(%target%,%(%Depend%)%)%)%,%
+%target,%(%else-then(%target%,%(%if(%Depends%,%(%Depend%)%)%)%)%)%,%
 %Target,%(%else-then(%Target%,%(%target%)%)%)%,%
 %TARGET,%(%else-then(%TARGET%,%(%toupper(%Target%)%)%)%)%,%
 %target,%(%else-then(%_Target%,%(%tolower(%Target%)%)%)%)%,%

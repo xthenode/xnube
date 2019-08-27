@@ -84,12 +84,15 @@ endif
 %WHAT%_COMPRESSED_SEPARATOR = %if(%compressed%,%($(%WHAT%_ARCHIVE_SEPARATOR))%)%
 
 %WHAT%_EXTRACT_DIR = $(%WHAT%_NAME)
+%WHAT%_TGZ_NAME = $(%WHAT%_NAME)
 %WHAT%_TGZ_PREFIX = 
-%WHAT%_TGZ = $(%WHAT%_NAME)$(%WHAT%_TGZ_PREFIX)$(%WHAT%_ARCHIVED_SEPARATOR)$(%WHAT%_ARCHIVED)$(%WHAT%_COMPRESSED_SEPARATOR)$(%WHAT%_COMPRESSED)
+%WHAT%_TGZ = $(%WHAT%_TGZ_NAME)$(%WHAT%_TGZ_PREFIX)$(%WHAT%_ARCHIVED_SEPARATOR)$(%WHAT%_ARCHIVED)$(%WHAT%_COMPRESSED_SEPARATOR)$(%WHAT%_COMPRESSED)
 %WHAT%_PATCH_TGZ_PREFIX = $(%WHAT%_NAME_SEPARATOR)patch
-%WHAT%_PATCH_TGZ = $(%WHAT%_NAME)$(%WHAT%_PATCH_TGZ_PREFIX)$(%WHAT%_ARCHIVED_SEPARATOR)$(%WHAT%_ARCHIVED)$(%WHAT%_COMPRESSED_SEPARATOR)$(%WHAT%_COMPRESSED)
+%WHAT%_PATCH_TGZ = $(%WHAT%_TGZ_NAME)$(%WHAT%_PATCH_TGZ_PREFIX)$(%WHAT%_ARCHIVED_SEPARATOR)$(%WHAT%_ARCHIVED)$(%WHAT%_COMPRESSED_SEPARATOR)$(%WHAT%_COMPRESSED)
+%WHAT%_PATCHED_TGZ_PREFIX = $(%WHAT%_PATCH_TGZ_PREFIX)ed
+%WHAT%_PATCHED_TGZ = $(%WHAT%_TGZ_NAME)$(%WHAT%_PATCHED_TGZ_PREFIX)$(%WHAT%_ARCHIVED_SEPARATOR)$(%WHAT%_ARCHIVED)$(%WHAT%_COMPRESSED_SEPARATOR)$(%WHAT%_COMPRESSED)
 %WHAT%_DOCS_TGZ_PREFIX = $(%WHAT%_NAME_SEPARATOR)docs
-%WHAT%_DOCS_TGZ = $(%WHAT%_NAME)$(%WHAT%_DOCS_TGZ_PREFIX)$(%WHAT%_ARCHIVED_SEPARATOR)$(%WHAT%_ARCHIVED)$(%WHAT%_COMPRESSED_SEPARATOR)$(%WHAT%_COMPRESSED)
+%WHAT%_DOCS_TGZ = $(%WHAT%_TGZ_NAME)$(%WHAT%_DOCS_TGZ_PREFIX)$(%WHAT%_ARCHIVED_SEPARATOR)$(%WHAT%_ARCHIVED)$(%WHAT%_COMPRESSED_SEPARATOR)$(%WHAT%_COMPRESSED)
 
 %cc_%#
 # %What% extract
@@ -134,6 +137,11 @@ endif
 %WHAT%_EXTRACT_PATCH = $(%WHAT%_EXTRACT)
 %WHAT%_LIST_PATCH_TGZ = $(%WHAT%_LIST_PATCH) $(%WHAT%_PATCH_TGZ)
 %WHAT%_EXTRACT_PATCH_TGZ = $(%WHAT%_EXTRACT_PATCH) $(%WHAT%_PATCH_TGZ)
+
+%WHAT%_LIST_PATCHED = $(%WHAT%_LIST)
+%WHAT%_EXTRACT_PATCHED = $(%WHAT%_EXTRACT)
+%WHAT%_LIST_PATCHED_TGZ = $(%WHAT%_LIST_PATCHED) $(%WHAT%_PATCHED_TGZ)
+%WHAT%_EXTRACT_PATCHED_TGZ = $(%WHAT%_EXTRACT_PATCHED) $(%WHAT%_PATCHED_TGZ)
 
 %WHAT%_LIST_DOCS = $(%WHAT%_LIST)
 %WHAT%_EXTRACT_DOCS = $(%WHAT%_EXTRACT)
@@ -194,6 +202,10 @@ again: unextract build
 
 test: test-%what%
 
+%cc_%########################################################################
+# install
+########################################################################%_cc%
+
 install-links: install-%what%-links
 
 install-docs: install-%what%-docs
@@ -201,6 +213,10 @@ install-docs: install-%what%-docs
 install-prefix: install-%what%-prefix
 
 install: install-%what%
+
+%cc_%########################################################################
+# build
+########################################################################%_cc%
 
 build: build-%what%
 
@@ -212,11 +228,45 @@ config: config-$(%WHAT%_DIR)
 
 help: help-%what%
 
+%cc_%########################################################################
+# docs
+########################################################################%_cc%
+
 list-docs: list-%what%-docs
+
+extract-docs: extract-%what%-docs
+
+archive-docs: archive-%what%-docs
+
+docs-archived: %what%-docs-archived
+
+%cc_%########################################################################
+# patch
+########################################################################%_cc%
 
 list-patch: list-%what%-patch
 
 extract-patch: extract-%what%-patch
+
+archive-patch: archive-%what%-patch
+
+patch-archived: %what%-patch-archived
+
+%cc_%########################################################################
+# patched
+########################################################################%_cc%
+
+list-patched: list-%what%-patched
+
+extract-patched: extract-%what%-patched
+
+archive-patched: archive-%what%-patched
+
+patched-archived: %what%-patched-archived
+
+%cc_%########################################################################
+# archive
+########################################################################%_cc%
 
 list: list-%what%
 
@@ -309,25 +359,38 @@ configed-$(%WHAT%_DIR): $(%WHAT%_DIR)
 ########################################################################%_cc%
 
 %cc_%#
-# List %What% Docs
+# List %What% docs
 #%_cc%
 list-%what%-docs: $(%WHAT%_DOCS_TGZ)
 	@(echo Listing $(%WHAT%_DOCS_TGZ)...;\
 	  (($(%WHAT%_LIST_DOCS_TGZ)) || (exit 1)))
 
 %cc_%#
-# Install %What% Docs
+# Install %What% docs
 #%_cc%
 install-%what%-docs: $(%WHAT%_DOCS_PREFIX)
 	@(echo Extracting $(%WHAT%_DOCS_TGZ)...;\
 	  (($(%WHAT%_EXTRACT_DOCS_TGZ)) || (exit 1)))
+
+%cc_%#
+# %What% docs archived
+#%_cc%
+%what%-docs-archived: 
+	@(echo $(%WHAT%_DOCS_TGZ))
+	  
+%cc_%#
+# Archive %What% docs
+#%_cc%
+archive-%what%-docs: 
+	@(echo Archiving $(%WHAT%_DIR) to $(%WHAT%_DOCS_TGZ)...;\
+	  (($(%WHAT%_ARCHIVE) $(%WHAT%_DOCS_TGZ) $(%WHAT%_DIR)) || (exit 1)))
 
 %cc_%########################################################################
 # patch
 ########################################################################%_cc%
 
 %cc_%#
-# List %What% Patch
+# List %What% patch
 #%_cc%
 list-%what%-patch: $(%WHAT%_PATCH_TGZ)
 	@(echo Listing $(%WHAT%_PATCH_TGZ)...;\
@@ -339,6 +402,50 @@ list-%what%-patch: $(%WHAT%_PATCH_TGZ)
 extract-%what%-patch: $(%WHAT%_DIR)
 	@(echo Extracting $(%WHAT%_PATCH_TGZ)...;\
 	  (($(%WHAT%_EXTRACT_PATCH_TGZ)) || (exit 1)))
+
+%cc_%#
+# %What% patch archived
+#%_cc%
+%what%-patch-archived: 
+	@(echo $(%WHAT%_PATCH_TGZ))
+	  
+%cc_%#
+# Archive %What% patch
+#%_cc%
+archive-%what%-patch: 
+	@(echo Archiving $(%WHAT%_DIR) to $(%WHAT%_PATCH_TGZ)...;\
+	  (($(%WHAT%_ARCHIVE) $(%WHAT%_PATCH_TGZ) $(%WHAT%_DIR)) || (exit 1)))
+
+%cc_%########################################################################
+# patched
+########################################################################%_cc%
+
+%cc_%#
+# List %What% patched
+#%_cc%
+list-%what%-patched: $(%WHAT%_PATCHED_TGZ)
+	@(echo Listing $(%WHAT%_PATCHED_TGZ)...;\
+	  (($(%WHAT%_LIST_PATCHED_TGZ)) || (exit 1)))
+
+%cc_%#
+# Extract %What% patched
+#%_cc%
+extract-%what%-patched: $(%WHAT%_DIR)
+	@(echo Extracting $(%WHAT%_PATCHED_TGZ)...;\
+	  (($(%WHAT%_EXTRACT_PATCHED_TGZ)) || (exit 1)))
+
+%cc_%#
+# %What% patched archived
+#%_cc%
+%what%-patched-archived: 
+	@(echo $(%WHAT%_PATCHED_TGZ))
+	  
+%cc_%#
+# Archive %What% patched
+#%_cc%
+archive-%what%-patched: 
+	@(echo Archiving $(%WHAT%_DIR) to $(%WHAT%_PATCHED_TGZ)...;\
+	  (($(%WHAT%_ARCHIVE) $(%WHAT%_PATCHED_TGZ) $(%WHAT%_DIR)) || (exit 1)))
 
 %cc_%########################################################################
 # archive

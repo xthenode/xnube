@@ -59,6 +59,14 @@
 %Target,%(%else-then(%Target%,%(%target%)%)%)%,%
 %TARGET,%(%else-then(%TARGET%,%(%toupper(%Target%)%)%)%)%,%
 %target,%(%else-then(%_Target%,%(%tolower(%Target%)%)%)%)%,%
+%source2,%(%else-then(%source2%,%(src)%)%)%,%
+%Source2,%(%else-then(%Source2%,%(%source2%)%)%)%,%
+%SOURCE2,%(%else-then(%SOURCE2%,%(%toupper(%Source2%)%)%)%)%,%
+%source2,%(%else-then(%_Source2%,%(%tolower(%Source2%)%)%)%)%,%
+%source,%(%else-then(%source%,%(%Source2%)%)%)%,%
+%Source,%(%else-then(%Source%,%(%source%)%)%)%,%
+%SOURCE,%(%else-then(%SOURCE%,%(%toupper(%Source%)%)%)%)%,%
+%source,%(%else-then(%_Source%,%(%tolower(%Source%)%)%)%)%,%
 %os,%(%else-then(%os%,%()%)%)%,%
 %Os,%(%else-then(%Os%,%(%os%)%)%)%,%
 %OS,%(%else-then(%OS%,%(%toupper(%Os%)%)%)%)%,%
@@ -150,7 +158,7 @@ $${%DEPENDS%_SRC} \
 ########################################################################
 # %Framework%
 %FRAMEWORK%_NAME = %Framework%
-%FRAMEWORK%_SOURCE = src
+%FRAMEWORK%_SOURCE = %Source%
 
 %FRAMEWORK%_PKG = ../../../../..
 %FRAMEWORK%_BLD = ../..
