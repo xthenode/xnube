@@ -35,6 +35,9 @@
         =====================================================================
         -->
         <link rel="stylesheet" type="text/css" href="../css/Xthenode.css"></link>
+        <link rel="stylesheet" type="text/css" href="../css/Xthenode-header.css"></link>
+        <link rel="stylesheet" type="text/css" href="../css/Xthenode-dropdown.css"></link>
+        <link rel="stylesheet" type="text/css" href="../css/Xthenode-logo.css"></link>
         <style type="text/css">
         </style>
     
@@ -59,102 +62,29 @@
         === header
         =====================================================================
         -->
-        <table class="header" border="0"><tr><td class="header-button">
-            <!--
-            =====================================================================
-            === parent
-            =====================================================================
-            -->
-            <table class="parent" border="0"><tr><td>
-                <button class="parent-button" onclick="onClickLocation(event,'.')">
-                    <table class="parent-dots"><tr>
-                        <td class="parent-dot"></td>
-                        <td class="parent-dot"></td>
-                    </tr></table>
-                </button>
-            </td></tr></table>
-            </td><td class="header-button">
-            <!--
-            =====================================================================
-            === dropdown
-            =====================================================================
-            -->
-            <table class="dropdown" border="0"><tr><td>
-                <button class="dropdown-button" onclick="myDropdownClick()">
-                    <table class="dropdown-bars"><tr>
-                        <td class="dropdown-bar"></td></tr><tr>
-                        <td class="dropdown-bar"></td></tr><tr>
-                        <td class="dropdown-bar"></td>
-                    </tr></table>
-                </button>
-            </td></tr></table>
-        </td></tr></table>
+        <div id="includeHeader" include="Xthenode-header.html">
+        <script>includeHTML('includeHeader');</script>
+        </div>
         <!--
         =====================================================================
         === dropdown
         =====================================================================
         -->
-        <div id="myDropdown" class="dropdown-content">
-            <a href="Xthenode-create-cxx.html" onclick="myItemClick()">Create C/C++ File</a>
-            <a href="Xthenode-create-html.html" onclick="myItemClick()">Create HTML File</a>
-            <a href="Xthenode-create-css.html" onclick="myItemClick()">Create CSS File</a>
-            <a href="Xthenode-create-js.html" onclick="myItemClick()">Create JS File</a>
-            <a href="Xthenode-create-t.html" onclick="myItemClick()">Create T File</a>
-            <a href="Xthenode-create-qtcreator-pro.html" onclick="myItemClick()">Create QtCreator Project</a>
-            <a href="Xthenode-create-gcc-makefile.html" onclick="myItemClick()">Create Gcc Makefile Project</a>
-            <a href="Xthenode.html" onclick="myItemClick()">Home</a>
-            <a href="../templates/t/html/xthenode-html.html" onclick="myItemClick()">/xthenode/</a>
+        <div id="includeDropdown" include="Xthenode-dropdown.html">
+        <script>includeHTML('includeDropdown');</script>
         </div>
         <!--
         =====================================================================
         === logo
         =====================================================================
         -->
-        <table class="logo" onclick="onClickLocation(event,'Xthenode.html')" border="0"><tr><td>
-            <table class="logo-ring" border="0"><tr><td>
-                <table class="logo-circle" border="0"><tr class="logo-icon"><td>
-                    <table class="logo-icon-icon" border="0"><tr><td class="logo-icon-image">
-                    </td></tr></table>
-                </td></tr><tr class="logo-icon-label"><td>XTHENODE</td></tr></table>
-            </td></tr></table>
-        </td></tr></table>
+        <div id="includeLogo" include="Xthenode-logo.html">
+        <script>includeHTML('includeLogo');</script>
+        </div>
         <!--
         =====================================================================
         === form
         =====================================================================
         -->
-        <!--form
-         Name="Form" Action="t.t" Method="POST" 
-         onSubmit="return setFormSubmit(getFormValue2('FormTemplate','FormAction','Form'),getFormValue('FormMethod','Form'),'Form')">
-             <div class="form"><hr/>
-    
-             <br/>
-             Content-Type: <select name="content_type">
-             <option value="text/plain">text</option>
-             <option value="text/html">html</option>
-             <option value="text/xml">xml</option>
-             <option value="application/json">json</option>
-             <option value="application/javascript">javascript</option>
-             <option value=""></option>
-             </select><br/>
-             Action: <select name="FormAction">
-             <option value="t.t">html.t</option>
-             <option value="/sthenode-cgi/cgi">cgi parameters</option>
-             <option value=""></option>
-             </select><br/>
-             Method: <select name="FormMethod">
-             <option value="POST">POST</option>
-             <option value="GET">GET</option>
-             <option value=""></option>
-             </select><br/>
-             <br/>
-    
-             <input type="submit" name="submit" value="submit"/><br/>
-             <hr></div>
-
-            <table><tr>
-                <td><a href="../../../../../.."><b>/xthenode/</b></a></td>
-            </tr></table>
-         </form-->
     </body>
 </html>

@@ -27,7 +27,7 @@
     =====================================================================
     -->
     <head>
-        <title>Xthenode - Create HTML File</title>
+        <title>Xthenode - Create C/C++ File</title>
 
         <!--
         =====================================================================
@@ -35,6 +35,10 @@
         =====================================================================
         -->
         <link rel="stylesheet" type="text/css" href="../css/Xthenode.css"></link>
+        <link rel="stylesheet" type="text/css" href="../css/Xthenode-header.css"></link>
+        <link rel="stylesheet" type="text/css" href="../css/Xthenode-dropdown.css"></link>
+        <link rel="stylesheet" type="text/css" href="../css/Xthenode-menubar.css"></link>
+        <link rel="stylesheet" type="text/css" href="../css/Xthenode-logo.css"></link>
         <style type="text/css">
         </style>
     
@@ -58,51 +62,16 @@
         === header
         =====================================================================
         -->
-        <table class="header" border="0"><tr><td class="header-button">
-            <!--
-            =====================================================================
-            === parent
-            =====================================================================
-            -->
-            <table class="parent" border="0"><tr><td>
-                <button class="parent-button" onclick="onClickLocation(event,'.')">
-                    <table class="parent-dots"><tr>
-                        <td class="parent-dot"></td>
-                        <td class="parent-dot"></td>
-                    </tr></table>
-                </button>
-            </td></tr></table>
-            </td><td class="header-button">
-            <!--
-            =====================================================================
-            === dropdown
-            =====================================================================
-            -->
-            <table class="dropdown" border="0"><tr><td>
-                <button class="dropdown-button" onclick="myDropdownClick()">
-                    <table class="dropdown-bars"><tr>
-                        <td class="dropdown-bar"></td></tr><tr>
-                        <td class="dropdown-bar"></td></tr><tr>
-                        <td class="dropdown-bar"></td>
-                    </tr></table>
-                </button>
-            </td></tr></table>
-        </td></tr></table>
+        <div id="includeHeader" include="Xthenode-header.html">
+        <script>includeHTML('includeHeader');</script>
+        </div>
         <!--
         =====================================================================
         === dropdown
         =====================================================================
         -->
-        <div id="myDropdown" class="dropdown-content">
-            <a href="Xthenode-create-cxx.html" onclick="myItemClick()">Create C/C++ File</a>
-            <a href="Xthenode-create-html.html" onclick="myItemClick()">Create HTML File</a>
-            <a href="Xthenode-create-css.html" onclick="myItemClick()">Create CSS File</a>
-            <a href="Xthenode-create-js.html" onclick="myItemClick()">Create JS File</a>
-            <a href="Xthenode-create-t.html" onclick="myItemClick()">Create T File</a>
-            <a href="Xthenode-create-qtcreator-pro.html" onclick="myItemClick()">Create QtCreator Project</a>
-            <a href="Xthenode-create-gcc-makefile.html" onclick="myItemClick()">Create Gcc Makefile Project</a>
-            <a href="Xthenode.html" onclick="myItemClick()">Home</a>
-            <a href="../templates/t/html/xthenode-html.html" onclick="myItemClick()">/xthenode/</a>
+        <div id="includeDropdown" include="Xthenode-dropdown.html">
+        <script>includeHTML('includeDropdown');</script>
         </div>
         <!--
         =====================================================================
@@ -111,7 +80,20 @@
         -->
         <ul class="menubar">
             <li><a href="Xthenode-create-cxx.html">Create C/C++ File</a></li>
+            <li><a href="Xthenode-create-html.html">Create .html File</a></li>
+            <li><a href="Xthenode-create-css.html">Create .css File</a></li>
+            <li><a href="Xthenode-create-js.html">Create .js File</a></li>
+            <li><a href="Xthenode-create-t.html">Create .t File</a></li>
+            <li><a href="Xthenode.html">Home</a></li>
         </ul>
+        <!--
+        =====================================================================
+        === logo
+        =====================================================================
+        -->
+        <div id="includeLogo" include="Xthenode-logo.html">
+        <script>includeHTML('includeLogo');</script>
+        </div>
         <!--
         =====================================================================
         === form

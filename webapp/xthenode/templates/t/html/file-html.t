@@ -31,7 +31,8 @@
 %is_Extension,%(%else-then(%is_Extension%,%()%)%)%,%
 %Extension,%(%else-then(%Extension%,%(%else-then(%fileextension(%File%)%,%(html)%)%)%)%)%,%
 %%(%
-%<!--
+%<?xml version="%XmlVersion%" encoding="%XmlEncoding%"?>
+<!--
 =====================================================================
 === Copyright (c) 1988-%year()% %Organization%
 ===

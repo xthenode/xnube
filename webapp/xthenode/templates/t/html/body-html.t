@@ -61,7 +61,7 @@
              <br/>
     
              <input type="submit" name="submit" value="submit"/><br/>
-             <hr></div>
+             <hr/></div>
 
             <table><tr>
                 <td><a href="../../../../../.."><b>/xthenode/</b></a></td>
