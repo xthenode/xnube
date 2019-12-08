@@ -21,12 +21,13 @@
 ===   Date: 11/21/2019
 =====================================================================
 -->
-<table class="header" border="0"><tr><td class="header-button">
+<table class="header" border="0"><tr>
     <!--
     =====================================================================
     === parent
     =====================================================================
     -->
+    <td class="header-button">
     <table class="parent" border="0"><tr><td>
         <button class="parent-button" onclick="onClickLocation(event,'.')">
             <table class="parent-dots"><tr>
@@ -47,13 +48,14 @@
             </tr></table>
         </button>
     </td></tr></table>
+    </td><td class="header-button">
     <!--
     =====================================================================
     === dropdown
     =====================================================================
     -->
     <table class="dropdown" border="0"><tr><td>
-        <button class="dropdown-button" onclick="onDropdownClick('myDropdown')">
+        <button class="dropdown-button" onclick="onDropdownClick('myDropdown', event)">
             <table class="dropdown-bars"><tr>
                 <td class="dropdown-bar"></td></tr><tr>
                 <td class="dropdown-bar"></td></tr><tr>

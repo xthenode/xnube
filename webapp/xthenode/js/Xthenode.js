@@ -66,9 +66,7 @@ function includeHTML(elementId, fileAttribute, notFound, requestFailed) {
 **
 */
 function getFormFieldValue(name, form) {
-   if (!form) {
-       form = 'form';
-   }
+   if (!form) { form = 'form'; }
    if (name) {
        if ((field = document[form][name])) {
            if ((value = field.value)) {
@@ -98,9 +96,7 @@ function getFormFieldValue(name, form) {
 **
 */
 function getFormValue(name, form) {
-   if (!form) {
-       form = 'form';
-   }
+   if (!form) { form = 'form'; }
    if (name) {
        if ((value = getFormFieldValue(name, form))) {
            return value;
@@ -133,9 +129,7 @@ function getFormValue2(name1, name2, form) {
 **
 */
 function setFormSubmit(action, method, form) {
-   if (!form) {
-       form = 'form';
-   }
+   if (!form) { form = 'form'; }
    if ((field = document[form])) {
        if (action) {
            if ('' != action) {
@@ -157,9 +151,7 @@ function setFormSubmit(action, method, form) {
 **
 */
 function setFormSubmit2(action1, action2, method, form) {
-   if (!form) {
-       form = 'form';
-   }
+   if (!form) { form = 'form'; }
    if ((field = document[form])) {
        if (action1) {
            if ('' != action1) {
@@ -204,10 +196,23 @@ function onClickLocation(event, location) {
         window.location = location;
     }
 }
+var thisParentLocation = false, thisSelfLocation = false;
+function onLocationInit(parentLocation, selfLocation) {
+    thisParentLocation = parentLocation;
+    thisSelfLocation = selfLocation;
+}
+function onClickParentLocation(event, location) {
+    if (thisParentLocation) { location = thisParentLocation; }
+    onClickLocation(event, location);
+}
+function onClickSelfLocation(event, location) {
+    if (thisSelfLocation) { location = thisSelfLocation; }
+    onClickLocation(event, location);
+}
 
 /*
 **
-** function myDropdownClick
+** function onDropdownClick
 ** 
 */
 var thisDropdown = false, initDropdown = false;
@@ -215,10 +220,8 @@ function onDropdownInit(dropdown) {
     thisDropdown = dropdown;
     initDropdown = true;
 }
-function onDropdownClick(dropdown) {
-    if (!dropdown) {
-        dropdown = "myDropdown";
-    }
+function onDropdownClick(dropdown, event) {
+    if (!dropdown) { dropdown = "myDropdown"; }
     if (dropdown) {
         var x = document.getElementById(dropdown);
         if (x) {
@@ -230,12 +233,19 @@ function onDropdownClick(dropdown) {
             }
         }
     }
-}
-function myDropdownClick(dropdown) {
-    if (!dropdown) {
-        dropdown = "myDropdown";
+    if (event) {
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } else {
+            if (window.event) {
+                window.event.cancelBubble = true;
+            }
+        }
     }
-    onDropdownClick(dropdown);
+}
+function myDropdownClick(dropdown, event) {
+    if (!dropdown) { dropdown = "myDropdown"; }
+    onDropdownClick(dropdown, event);
 }
 
 /*
@@ -248,6 +258,7 @@ window.onclick = function(event) {
         && (!event.target.matches('.dropdown-button')) 
         && (!event.target.matches('.dropdown-bars')) 
         && (!event.target.matches('.dropdown-bar'))
+        && (!event.target.matches('.dropdown-item'))
         && (thisDropdown)) {
         var x = document.getElementById(thisDropdown);
         if (x) {
