@@ -250,6 +250,39 @@ function myDropdownClick(dropdown, event) {
 
 /*
 **
+** function onDropoverClick
+** 
+*/
+var thisDropover = false, initDropover = false;
+function onDropoverInit(dropover) {
+    thisDropover = dropover;
+    initDropover = true;
+}
+function onDropoverClick(dropover) {
+    if (!dropover) { dropover = "myDropover"; }
+    if (dropover) {
+        var y = document.getElementsByName(dropover);
+        if (y) {
+            var n = y.length;
+            if (n > 0) {
+                thisDropover = dropover;
+                for (i = 0; i < n; ++i) {
+                    var x = y[i];
+                    if (x) {
+                        if (x.style.visibility !== "visible") {
+                            x.style.visibility = "visible";
+                        } else {
+                            x.style.visibility = "hidden";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+**
 ** window.onclick = function
 ** 
 */
@@ -258,12 +291,48 @@ window.onclick = function(event) {
         && (!event.target.matches('.dropdown-button')) 
         && (!event.target.matches('.dropdown-bars')) 
         && (!event.target.matches('.dropdown-bar'))
+        && (!event.target.matches('.dropdown-content'))
         && (!event.target.matches('.dropdown-item'))
         && (thisDropdown)) {
         var x = document.getElementById(thisDropdown);
         if (x) {
             if (x.style.display === "block") {
                 x.style.display = "none";
+            } else {
+                if (initDropdown) { 
+                    x.style.display = "block"; 
+                }
+            }
+        }
+    }
+    if ((!event.target.matches('.dropover')) 
+        && (!event.target.matches('.dropover-button')) 
+        && (!event.target.matches('.dropover-bars')) 
+        && (!event.target.matches('.dropover-bar'))
+        && (thisDropover)) {
+        var y = document.getElementsByName(thisDropover);
+        if (y) {
+            var n = y.length;
+            if (n > 0) {
+                var o = true;
+                for (i = 0; (i < n); ++i) {
+                    var x = y[i];
+                    if (x.contains(event.target)) {
+                        o = false;
+                    }
+                }
+                if (o) {
+                    for (i = 0; (i < n); ++i) {
+                        x = y[i];
+                        if (x.style.visibility === "visible") {
+                            x.style.visibility = "hidden";
+                        } else {
+                            if (initDropover) { 
+                                x.style.visibility = "visible"; 
+                            }
+                        }
+                    }
+                }
             }
         }
     }
