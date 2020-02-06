@@ -63,12 +63,12 @@
 %Os,%(%else-then(%Os%,%(%os%)%)%)%,%
 %OS,%(%else-then(%OS%,%(%toupper(%Os%)%)%)%)%,%
 %os,%(%else-then(%_Os%,%(%tolower(%Os%)%)%)%)%,%
-%language,%(%else-then(%language%,%(%else-no(%IsLanguage%,cpp)%)%)%)%,%
-%Language,%(%else-then(%else-no(%IsLanguage%,%Language%)%,%(%language%)%)%)%,%
+%language,%(%else-then(%language%,%(%if-no(%is_Language%,,%()%)%)%)%)%,%
+%Language,%(%else-then(%if-no(%is_Language%,,%Language%)%,%(%language%)%)%)%,%
 %LANGUAGE,%(%else-then(%LANGUAGE%,%(%toupper(%Language%)%)%)%)%,%
 %language,%(%else-then(%_Language%,%(%tolower(%Language%)%)%)%)%,%
-%style,%(%else-then(%style%,%(%else-no(%IsStyle%,%(xos)%)%)%)%)%,%
-%Style,%(%else-then(%else-no(%IsStyle%,%(%Style%)%)%,%(%style%)%)%)%,%
+%style,%(%else-then(%style%,%(%if-no(%is_Style%,,%()%)%)%)%)%,%
+%Style,%(%else-then(%if-no(%is_Style%,,%(%Style%)%)%,%(%style%)%)%)%,%
 %STYLE,%(%else-then(%STYLE%,%(%toupper(%Style%)%)%)%)%,%
 %style,%(%else-then(%_Style%,%(%tolower(%Style%)%)%)%)%,%
 %makefile,%(%else-then(%makefile%,%(Makefile)%)%)%,%
@@ -95,7 +95,7 @@ OTHER_THIRDPARTY_NAME = thirdparty
 OTHER_THIRDPARTY_VERSION_PKG = ${OTHER_VERSION_PKG}/${OTHER_THIRDPARTY_NAME}
 
 %FRAMEWORK%_PKG = ${PKG}
-%FRAMEWORK%_SRC = ${%FRAMEWORK%_PKG}/src
+%FRAMEWORK%_SRC = ${%FRAMEWORK%_PKG}/%Source%
 %FRAMEWORK%_BLD = ${%FRAMEWORK%_PKG}/${BLD}/${BUILD_TYPE}
 %FRAMEWORK%_LIB = ${%FRAMEWORK%_BLD}/lib
 %FRAMEWORK%_BIN = ${%FRAMEWORK%_BLD}/bin
@@ -119,8 +119,8 @@ OTHER_THIRDPARTY_VERSION_PKG = ${OTHER_VERSION_PKG}/${OTHER_THIRDPARTY_NAME}
 #%DEPENDS%_PKG = ${OTHER_THIRDPARTY_VERSION_PKG}/${%DEPENDS%_VERSION_DIR}
 #%DEPENDS%_PKG = ${OTHER_VERSION_PKG}/${%DEPENDS%_VERSION_DIR}
 %DEPENDS%_PKG = ${OTHER_DEPENDS_PKG}/${%DEPENDS%_DEPENDS_DIR}
-#%DEPENDS%_SRC = ${%DEPENDS%_PKG}/src/${BN_GROUP}/${BN_NAME}
-%DEPENDS%_SRC = ${%DEPENDS%_PKG}/src
+#%DEPENDS%_SRC = ${%DEPENDS%_PKG}/%Source%/${BN_GROUP}/${BN_NAME}
+%DEPENDS%_SRC = ${%DEPENDS%_PKG}/%Source%
 %DEPENDS%_BLD = ${%DEPENDS%_PKG}/${BLD}/${BUILD_TYPE}
 %DEPENDS%_LIB = ${%DEPENDS%_BLD}/lib
 %DEPENDS%_BIN = ${%DEPENDS%_BLD}/bin

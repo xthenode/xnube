@@ -1,5 +1,5 @@
 %########################################################################
-%# Copyright (c) 1988-2019 $organization$
+%# Copyright (c) 1988-2020 $organization$
 %#
 %# This software is provided by the author and contributors ``as is'' 
 %# and any express or implied warranties, including, but not limited to, 
@@ -13,18 +13,19 @@
 %# or otherwise) arising in any way out of the use of this software, 
 %# even if advised of the possibility of such damage.
 %#
-%#   File: hpp-hpp.t
+%#   File: bash.t
 %#
 %# Author: $author$
-%#   Date: 6/18/2019
+%#   Date: 2/5/2020
 %########################################################################
 %with(%
 %include_path,%(%else-then(%include_path%,%(%filepath(%input%)%)%)%)%,%
-%is_exported,%(%else-then(%is_exported%,%(%is_Exported%)%)%)%,%
-%exported,%(%else-then(%if-no(%is_exported%,,%(%exported%)%)%,%(%if-no(%is_exported%,,%(%Exported_prefix%exported%Exported_suffix%)%)%)%)%)%,%
-%Exported,%(%else-then(%if-no(%is_exported%,,%(%Exported%)%)%,%(%exported%)%)%)%,%
-%EXPORTED,%(%else-then(%EXPORTED%,%(%toupper(%Exported%)%)%)%)%,%
-%exported,%(%else-then(%_exported%,%(%tolower(%Exported%)%)%)%)%,%
 %%(%
-%%include(%include_path%/hxx-hxx.t)%%
+%%include(%include_path%/file-bash.t)%%
+%if [ "$1" != "" ]; then
+echo usage `basename $0` 
+else # [ "$1" != "" ]; then
+echo usage `basename $0` 
+fi # [ "$1" != "" ]; then
+%
 %)%)%

@@ -34,5 +34,14 @@
 %%File_ifndef_begin%%
 %%then-if(%Includes%%Sys_includes%,
 )%%
+%
+#if defined(__cplusplus)
+extern "C" {
+#endif /*/ defined(__cplusplus) /*/
+
+#if defined(__cplusplus)
+} /*/ extern "C" /*/
+#endif /*/ defined(__cplusplus) /*/
+%
 %%File_ifndef_end%%
 %)%)%

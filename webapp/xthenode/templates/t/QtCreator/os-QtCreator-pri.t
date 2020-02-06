@@ -59,7 +59,7 @@
 %Target,%(%else-then(%Target%,%(%target%)%)%)%,%
 %TARGET,%(%else-then(%TARGET%,%(%toupper(%Target%)%)%)%)%,%
 %target,%(%else-then(%_Target%,%(%tolower(%Target%)%)%)%)%,%
-%os,%(%else-then(%os%,%(%else-no(%IsOs%,%(Linux)%,%(Os)%)%)%)%)%,%
+%os,%(%else-then(%os%,%(%if-no(%is_Os%,,%(Linux)%,%(Os)%)%)%)%)%,%
 %Os,%(%else-then(%Os%,%(%os%)%)%)%,%
 %OS,%(%else-then(%OS%,%(%toupper(%Os%)%)%)%)%,%
 %os,%(%else-then(%_Os%,%(%tolower(%Os%)%)%)%)%,%
@@ -85,7 +85,8 @@
 %title,%(%else-then(%_Title%,%(%tolower(%Title%)%)%)%)%,%
 %%(%
 %%include(%Filepath%/QtCreator-file.t)%%
-%%if-no(%IsOs%,%(UNAME = $$system(uname)
+%%if-no(%is_Os%,%(
+UNAME = $$system(uname)
 
 contains(UNAME,Darwin) {
 %FRAMEWORK%_OS = macosx
@@ -104,8 +105,18 @@ BUILD_OS = $${%FRAMEWORK%_OS}
 BUILD_OS = os
 } # contains(BUILD_OS,%FRAMEWORK%_OS)
 
-#CONFIG += c++11
-#CONFIG += c++0x
+contains(BUILD_CPP_VERSION,10) {
+CONFIG += c++0x
+} else {
+contains(BUILD_CPP_VERSION,98|03|11|14|17) {
+CONFIG += c++$${BUILD_CPP_VERSION}
+} else {
+} # contains(BUILD_CPP_VERSION,98|03|11|14|17)
+} # contains(BUILD_CPP_VERSION,10)
+
+contains(XROSTRA_OS,linux) {
+QMAKE_CXXFLAGS += -fpermissive
+}
 
 %parse(%Depends%,;,,,,%(%
 %%with(%
@@ -154,7 +165,7 @@ BUILD_OS = os
 )%)%%
 %)%,Depends)%%
 %$${build_%Framework%_LIBS} \
-%if-no(%IsOs%,%(
+%if-no(%is_Os%,%(
 contains(%FRAMEWORK%_OS,macosx|linux) {
 %Framework%_LIBS += \
 -lpthread \

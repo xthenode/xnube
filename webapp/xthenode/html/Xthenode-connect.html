@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 =====================================================================
-=== Copyright (c) 1988-2019 $organization$
+=== Copyright (c) 1988-2020 $organization$
 ===
 === This software is provided by the author and contributors ``as is'' 
 === and any express or implied warranties, including, but not limited to, 
@@ -14,10 +15,10 @@
 === or otherwise) arising in any way out of the use of this software, 
 === even if advised of the possibility of such damage.
 ===
-===   File: Xthenode-create-qtcreator-pro.html
+===   File: Xthenode-connect.html
 ===
 === Author: $author$
-===   Date: 7/10/2019
+===   Date: 2/3/2020
 =====================================================================
 -->
 <html>
@@ -27,7 +28,7 @@
     =====================================================================
     -->
     <head>
-        <title>Xthenode - Create QtCreator project</title>
+        <title>Xthenode - Connect to</title>
 
         <!--
         =====================================================================
@@ -49,6 +50,7 @@
         -->
         <script type="text/javascript" src="../js/Xthenode.js"></script>
         <script type="text/javascript">
+        onLocationInit('Xthenode.html', 'Xthenode-connect.html');
         </script>
     </head>
     <!--
@@ -88,75 +90,28 @@
         =====================================================================
         -->
         <ul class="menubar">
-            <li><a href="Xthenode-create-qtcreator-pro.html">Create QtCreator project</a></li>
-            <li><a href="Xthenode-create-gcc-makefile.html">Create Makefile project</a></li>
-            <li><a href="Xthenode-create-t.html">Create .t File</a></li>
+            <li><a href="Xthenode-connect.html">Connect to</a></li>
             <li><a href="Xthenode.html">Home</a></li>
         </ul>
-
         <!--
         =====================================================================
         === form
         =====================================================================
         -->
-        <form name="Form" method="POST" action="../templates/t/QtCreator/QtCreator-pro.t"
+        <form name="Form" method="POST" action="http://localhost/source/"
          onSubmit="return setFormSubmit(getFormValue2('FormTemplate','FormAction','Form'),getFormValue('FormMethod','Form'),'Form')">
             <div class="form">
 
-             File: <input name="File" value=""/> [Framework.pri | Framework.pro]<br/>
-    
-             Template: <select name="FormTemplate">
-             <option value="../templates/t/QtCreator/QtCreator-pri.t">QtCreator.pri</option>
-             <option value="../templates/t/QtCreator/os-QtCreator-pri.t">Os-QtCreator.pri</option>
-             <option value="../templates/t/QtCreator/build-QtCreator-pri.t">Build-QtCreator.pri</option>
-             <option value="../templates/t/QtCreator/build-depend-QtCreator-pri.t">Build-Depend-QtCreator.pri</option>
-             <option value="../templates/t/QtCreator/depend-QtCreator-pri.t">Depend-QtCreator.pri</option>
-             <option value=""/>
-             <option value="../templates/t/QtCreator/lib-QtCreator-pri.t">Library-QtCreator.pri</option>
-             <option value="../templates/t/QtCreator/os-lib-QtCreator-pro.t">Os-Library-QtCreator.pro</option>
-             <option value="../templates/t/QtCreator/os-lib-QtCreator-pro-config.t">Os-Library-QtCreator-pro-config</option>
-             <option value=""/>
-             <option value="../templates/t/QtCreator/app-QtCreator-pri.t">Executable-QtCreator.pri</option>
-             <option value="../templates/t/QtCreator/os-app-QtCreator-pro.t">Os-Executable-QtCreator.pro</option>
-             <option value="../templates/t/QtCreator/os-app-QtCreator-pro-config.t">Os-Executable-QtCreator-pro-config</option>
-             <option value=""/>
-             <option value="../templates/t/QtCreator/slib-QtCreator-pri.t">Shared-Library-QtCreator.pri</option>
-             <option value="../templates/t/QtCreator/os-slib-QtCreator-pro.t">Os-Shared-Library-QtCreator.pro</option>
-             <option value="../templates/t/QtCreator/os-slib-QtCreator-pro-config.t">Os-Shared-Library-QtCreator-pro-config</option>
-             <option value=""/>
-             <option value="/sthenode-cgi/cgi">cgi parameters</option>
-             </select><br/>
-
-             </br>
-             Depends: <input name="Depends" value="" size="30"/>
-             <input name="is_Depends" value="no" type="checkbox" checked="checked">no</input><br/>
-             Framework: <input name="Framework" value=""/>
-             <input name="is_Framework" value="no" type="checkbox" unchecked="checked">no</input><br/>
-             Target: <input name="Target" value=""/><input type="checkbox" name="HasExe" value="yes" unchecked="yes"/>_exe
-             <input name="is_Target" value="no" type="checkbox" unchecked="checked">no</input><br/>
-             Source: <select name="Source">
-                 <option value="source">source</option>
-                 <option value="src">src</option>
-                 <option value=""></option>
-             </select>[src]
-             <input name="is_Source" value="no" type="checkbox" unchecked="checked">no</input><br/>
-             Include: <select name="Include">
-                 <option value="include">include</option>
-                 <option value="inc">inc</option>
-                 <option value=""></option>
-             </select>[include]
-             <input name="is_Include" value="no" type="checkbox" unchecked="checked">no</input><br/>
-             Os: <input name="Os" value=""/><select name="Os2">
-             <option value=""></option>
-             <option value="Linux">Linux</option>
-             <option value="MacOSX">MacOSX</option>
-             <option value="Windows">Windows</option>
-             </select> [Linux] <input type="checkbox" name="is_Os" value="no" checked="yes"/>no<br/>
-
-             <br/>
-             Organization: <input name="Organization" value="$organization$"/><br/>
-             Author: <input name="Author" value="$author$"/><br/>
-             Date: <input name="Date" value=""/><br/>
+            Location: <select name="FormTemplate">
+            <option value="http://192.168.218.159/source/">vmhost-64/source/</option>
+            <option value="http://192.168.218.168/source/">vmhost-32/source/</option>
+            <option value="http://192.168.218.1/source/">vmhost/source/</option>
+            <option value=""/>
+            <option value="http://localhost/source/">localhost/source/</option>
+            <option value=""/>
+            <option value="/xthenode-cgi/cgi">cgi parameters</option>
+            </select>
+            <br/>
 
             <br/>
             Content-Type: <select name="content_type">
@@ -168,13 +123,13 @@
             <option value=""></option>
             </select><br/>
             Action: <select name="FormAction">
-            <option value="../templates/t/QtCreator/QtCreator-pro.t">QtCreator-pro.t</option>
+            <option value="http://localhost/source/">localhost/source/</option>
             <option value=""></option>
-            <option value="/sthenode-cgi/cgi">cgi parameters</option>
+            <option value="/xthenode-cgi/cgi">cgi parameters</option>
             </select><br/>
             Method: <select name="FormMethod">
             <option value="POST">POST</option>
-            <option value="GET">GET</option>
+            <option value="GET" selected="selected">GET</option>
             <option value=""></option>
             </select><br/><br/>
 

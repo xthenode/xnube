@@ -28,7 +28,7 @@ typedef )%)%)%
 ///  Class: %ClassT%
 ///////////////////////////////////////////////////////////////////////
 %if-no(%is_Template%,,%(template <%Template%>
-)%)%class _EXPORT_CLASS %ClassT%%
+)%)%class %if-then(%Exported%, )%%ClassT%%
 %%then-if(%then-if(%if-then(%ClassTImplements%,%if(%ClassTExtends%,%(,)%)%)%, virtual public )%%
 %%then-if(%ClassTExtends%, public )%,:)% {
 public:%
@@ -37,13 +37,18 @@ public:%
 %%then-if(%if-then(%ClassTExtends%, Extends;)%,
     typedef )%%
 %,
-)%
+)%%
+%    typedef %ClassT% Derives; 
+
+    ///////////////////////////////////////////////////////////////////////
+    /// constructors / destructor
+    ///////////////////////////////////////////////////////////////////////
     %ClassT%%(()%const %ClassT%& copy%())% {
     }
     %ClassT%%(()%%())% {
     }
     virtual ~%ClassT%%(()%%())% {
     }
-}; /// class _EXPORT_CLASS %ClassT%
+}; /// class %if-then(%Exported%, )%%ClassT%
 %if-no(%is_Template%,,%(typedef %ClassT%<> %Class%;
 )%)%)%)%

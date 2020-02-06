@@ -80,10 +80,10 @@
 %EXE,%(%else-then(%EXE%,%(%toupper(%Exe%)%)%)%)%,%
 %exe,%(%else-then(%_Exe%,%(%tolower(%Exe%)%)%)%)%,%
 %isos,%(%else-then(%isos%,%()%)%)%,%
-%IsOs,%(%else-then(%IsOs%,%(%isos%)%)%)%,%
-%ISOS,%(%else-then(%ISOS%,%(%toupper(%IsOs%)%)%)%)%,%
-%isos,%(%else-then(%_IsOs%,%(%tolower(%IsOs%)%)%)%)%,%
-%os,%(%else-then(%os%,%(%else-then(%Os_input%,%(%else-no(%IsOs%,Linux)%)%)%)%)%)%,%
+%is_Os,%(%else-then(%is_Os%,%(%isos%)%)%)%,%
+%ISOS,%(%else-then(%ISOS%,%(%toupper(%is_Os%)%)%)%)%,%
+%isos,%(%else-then(%_is_Os%,%(%tolower(%is_Os%)%)%)%)%,%
+%os,%(%else-then(%os%,%(%else-then(%Os_input%,%(%if-no(%is_Os%,,Linux)%)%)%)%)%)%,%
 %Os,%(%else-then(%Os%,%(%os%)%)%)%,%
 %OS,%(%else-then(%OS%,%(%toupper(%Os%)%)%)%)%,%
 %os,%(%else-then(%_Os%,%(%tolower(%Os%)%)%)%)%,%
@@ -112,7 +112,7 @@
 BMK = build/Makefile/Gcc
 MAK = projects/Makefile/Gcc
 PRJ = projects/%if(%os%,${OS},os)%/Makefile/Gcc
-SRC = src
+SRC = %Source%
 
 include $(PKG)/$(BMK)/Makedefines
 include $(PKG)/$(MAK)/Makedefines

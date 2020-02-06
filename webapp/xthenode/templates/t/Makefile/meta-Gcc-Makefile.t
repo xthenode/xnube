@@ -63,11 +63,11 @@
 %Os,%(%else-then(%Os%,%(%os%)%)%)%,%
 %OS,%(%else-then(%OS%,%(%toupper(%Os%)%)%)%)%,%
 %os,%(%else-then(%_Os%,%(%tolower(%Os%)%)%)%)%,%
-%language,%(%else-then(%language%,%(cpp)%)%)%,%
+%language,%(%else-then(%language%,%()%)%)%,%
 %Language,%(%else-then(%Language%,%(%language%)%)%)%,%
 %LANGUAGE,%(%else-then(%LANGUAGE%,%(%toupper(%Language%)%)%)%)%,%
 %language,%(%else-then(%_Language%,%(%tolower(%Language%)%)%)%)%,%
-%style,%(%else-then(%style%,%(xos)%)%)%,%
+%style,%(%else-then(%style%,%()%)%)%,%
 %Style,%(%else-then(%Style%,%(%style%)%)%)%,%
 %STYLE,%(%else-then(%STYLE%,%(%toupper(%Style%)%)%)%)%,%
 %style,%(%else-then(%_Style%,%(%tolower(%Style%)%)%)%)%,%

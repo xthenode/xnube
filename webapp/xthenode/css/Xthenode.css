@@ -27,6 +27,7 @@
     font-family: Arial;
     background-color: white;
     background-image: url('../images/Tree_Shadows.jpg');
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -52,7 +53,7 @@ a {
     text-decoration: none; 
 }
 a:hover { 
-    color: brown; 
+    color: Teal; 
     font-weight: bolder; 
     text-decoration: underline; 
 }

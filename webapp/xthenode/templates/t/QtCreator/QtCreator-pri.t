@@ -71,11 +71,11 @@
 %Os,%(%else-then(%Os%,%(%os%)%)%)%,%
 %OS,%(%else-then(%OS%,%(%toupper(%Os%)%)%)%)%,%
 %os,%(%else-then(%_Os%,%(%tolower(%Os%)%)%)%)%,%
-%language,%(%else-then(%language%,%(%if-no(%IsLanguage%,%()%,%(cpp)%)%)%)%)%,%
+%language,%(%else-then(%language%,%(%if-no(%is_Language%,%()%,%()%)%)%)%)%,%
 %Language,%(%else-then(%Language%,%(%language%)%)%)%,%
 %LANGUAGE,%(%else-then(%LANGUAGE%,%(%toupper(%Language%)%)%)%)%,%
 %language,%(%else-then(%_Language%,%(%tolower(%Language%)%)%)%)%,%
-%style,%(%else-then(%style%,%(%if-no(%IsStyle%,%()%,%(xos)%)%)%)%)%,%
+%style,%(%else-then(%style%,%(%if-no(%is_Style%,%()%,%()%)%)%)%)%,%
 %Style,%(%else-then(%Style%,%(%style%)%)%)%,%
 %STYLE,%(%else-then(%STYLE%,%(%toupper(%Style%)%)%)%)%,%
 %style,%(%else-then(%_Style%,%(%tolower(%Style%)%)%)%)%,%
@@ -109,7 +109,7 @@ OTHER_BLD = ..
 THIRDPARTY_NAME = thirdparty
 THIRDPARTY_PKG = $${OTHER_PKG}/$${THIRDPARTY_NAME}
 THIRDPARTY_PRJ = $${OTHER_PRJ}/$${THIRDPARTY_NAME}
-THIRDPARTY_SRC = $${OTHER_PRJ}/src/$${THIRDPARTY_NAME}
+THIRDPARTY_SRC = $${OTHER_PRJ}/%Source%/$${THIRDPARTY_NAME}
 
 %parse(%Depends%,;,,,,%(%
 %%with(%
@@ -123,7 +123,7 @@ THIRDPARTY_SRC = $${OTHER_PRJ}/src/$${THIRDPARTY_NAME}
 %DEPENDS%_VERSION = $${%DEPENDS%_VERSION_MAJOR}.$${%DEPENDS%_VERSION_MINOR}.$${%DEPENDS%_VERSION_RELEASE}
 %DEPENDS%_NAME = %Depends%
 %DEPENDS%_GROUP = $${%DEPENDS%_NAME}
-%DEPENDS%_SOURCE = src
+%DEPENDS%_SOURCE = %Source%
 %DEPENDS%_DIR = $${%DEPENDS%_GROUP}/$${%DEPENDS%_NAME}-$${%DEPENDS%_VERSION}
 %DEPENDS%_PKG_DIR = $${%DEPENDS%_NAME}%then-if(%Language%,/)%%then-if(%Style%,/)%
 %DEPENDS%_HOME_BUILD = $${HOME}/build/$${%DEPENDS%_NAME}

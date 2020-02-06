@@ -70,7 +70,7 @@
      outline: none;
 }
 .parent-button:hover .parent-dot, .parent-button:focus .parent-dot {
-     background-color: brown;
+     background-color: Teal;
 }
 .parent-dots {
     width: 100%;
@@ -121,7 +121,7 @@
      outline: none;
 }
 .dropdown-button:hover .dropdown-bar, .dropdown-button:focus .dropdown-bar {
-     background-color: brown;
+     background-color: Teal;
 }
 .dropdown-bars {
     width: 100%;
@@ -162,7 +162,7 @@
      display: block;
 }
 .dropdown-content a:hover {
-     color: brown;
+     color: Teal;
      text-decoration: underline;
 }
 /*
@@ -237,7 +237,7 @@
     cursor: pointer;
 }
 .footer-logo-ring:hover {
-    background-color: brown;
+    background-color: Teal;
 }
 .footer-logo-circle { 
     width: 56px;
@@ -334,7 +334,7 @@
      outline: none;
 }
 .dropover-button:hover .dropover-bar, .dropover-button:focus .dropover-bar {
-     background-color: brown;
+     background-color: Teal;
 }
 .dropover-bars {
     width: 100%;

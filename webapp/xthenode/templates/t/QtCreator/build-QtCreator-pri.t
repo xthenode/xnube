@@ -84,8 +84,17 @@
 %TITLE,%(%else-then(%TITLE%,%(%toupper(%Title%)%)%)%)%,%
 %title,%(%else-then(%_Title%,%(%tolower(%Title%)%)%)%)%,%
 %%(%
-%%include(%Filepath%/QtCreator-file.t)%%
-%
+%%include(%Filepath%/QtCreator-file.t)%
+UNAME = $$system(uname)
+
+contains(UNAME,Uname) {
+BUILD_OS = %FRAMEWORK%_OS
+} else {
+BUILD_OS = os
+} # contains(UNAME,Uname)
+
+#BUILD_CPP_VERSION = 11
+
 %parse(%Depends%,;,,,,%(%
 %%with(%
 %%(%

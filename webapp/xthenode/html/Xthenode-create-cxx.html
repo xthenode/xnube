@@ -104,7 +104,7 @@
          onSubmit="return setFormSubmit(getFormValue2('FormTemplate','FormAction','Form'),getFormValue('FormMethod','Form'),'Form')">
             <div class="form">
 
-             File: <input name="File" value=""/>[%Class%]
+             File: <input name="File" value=""/>[%class%]
              <input type="radio" name="Extension" value="hxx" checked="checked">.hxx</input>
              <input type="radio" name="Extension" value="cxx">.cxx</input>
              <input type="radio" name="Extension" value="hpp">.hpp</input>
@@ -115,7 +115,7 @@
              <br/>
              Template: <select name="FormTemplate">
              <option value="../templates/t/cxx/class-hxx-cxx.t">C++ class</option>
-             <option value="../templates/t/cxx/h-hxx-c-cxx.t">C/C++ file</option>
+             <option value="../templates/t/cxx/h-hxx-c-cxx.t" selected="selected">C/C++ file</option>
              <option value="../templates/t/cxx/hxx-cxx.t">C++ file</option>
              <option value="../templates/t/cxx/h-c.t">C file</option>
              <option value="/xthenode-cgi/cgi">cgi parameters</option>
@@ -124,11 +124,16 @@
              <br/>
              <br/>
              
-            <b>#ifndef </b><input name="File_ifndef" value="xos"/><b></b>[xos]
-            <input type="checkbox" name="is_File_ifndef" value="no" unchecked=""/>no<br/>
+            <b>#ifndef </b>
+            <input type="checkbox" name="File_ifndef_define_prefix" value="_" unchecked=""/>
+            <b>_</b><input name="File_ifndef" value=""/><b>_</b>
+            <input type="checkbox" name="File_ifndef_define_suffix" value="_" unchecked=""/>
+            [%namespace%]
+            <input type="checkbox" name="is_File_ifndef" value="no" unchecked=""/>no
+            <br/>
             <b>#include "</b><input name="Include" value="xos/base/Base.hxx"/><b>"</b>[xos/base/Base.hxx]
             <input type="checkbox" name="is_Include" value="no" unchecked=""/>no<br/>
-            <b>#include &lt;</b><input name="Sys_include" value="string"/><b>&gt;</b>[string]
+            <b>#include &lt;</b><input name="Sys_include" value=""/><b>&gt;</b>[string]
             <input type="checkbox" name="is_Sys_include" value="no" checked="checked"/>no<br/>
             <br/>
             

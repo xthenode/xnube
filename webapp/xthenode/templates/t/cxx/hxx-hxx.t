@@ -28,8 +28,11 @@
 %File_ifndef_end,%(%else-then(%File_ifndef_end%,%(
 #endif /// %File_ifndef_define%
 )%)%)%,%
-%FILE_IFNDEF_END,%(%else-then(%FILE_IFNDEF_END%,%(%toupper(%File_ifndef_end%)%)%)%)%,%
-%file_ifndef_end,%(%else-then(%_File_ifndef_end%,%(%tolower(%File_ifndef_end%)%)%)%)%,%
+%is_exported,%(%else-then(%is_exported%,%(%is_Exported%)%)%)%,%
+%exported,%(%else-then(%if-no(%is_exported%,,%(%exported%)%)%,%(%if-no(%is_exported%,,%(%EXPORTED_PREFIX%EXPORTED%EXPORTED_SUFFIX%)%)%)%)%)%,%
+%Exported,%(%else-then(%if-no(%is_exported%,,%(%Exported%)%)%,%(%exported%)%)%)%,%
+%EXPORTED,%(%else-then(%EXPORTED%,%(%toupper(%Exported%)%)%)%)%,%
+%exported,%(%else-then(%_exported%,%(%tolower(%Exported%)%)%)%)%,%
 %%(%
 %%File_ifndef_begin%%
 %%then-if(%Includes%%Sys_includes%,
