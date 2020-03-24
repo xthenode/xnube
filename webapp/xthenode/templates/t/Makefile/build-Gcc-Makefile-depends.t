@@ -19,24 +19,58 @@
 %#   Date: 7/16/2017
 %########################################################################
 %with(%
+%is_depends,%(%else-then(%is_depends%,%(%is_Depends%)%)%)%,%
+%depends,%(%else-then(%if-no(%is_depends%,,%(%depends%)%)%,%(%if-no(%is_depends%,,%(depends)%)%)%)%)%,%
+%Depends,%(%else-then(%if-no(%is_depends%,,%(%Depends%)%)%,%(%if-no(%is_depends%,,%(%depends%)%)%)%)%)%,%
+%DEPENDS,%(%else-then(%DEPENDS%,%(%toupper(%Depends%)%)%)%)%,%
+%depends,%(%else-then(%_depends%,%(%tolower(%Depends%)%)%)%)%,%
 %%(%
 %%parse(%Depends%,;,,,,%(%parse(%Depends%,%(,)%,,,,%(
 ########################################################################
-# %Depends%
-%Build%%Depends%_USRDEFINES += \
-%Depends_USRDEFINES%
+# build %Depends%
+#
+# pkg-config --cflags --libs %Depends%
+#
 
-%Build%%Depends%_USRINCLUDES += \
-%Depends_USRINCLUDES%
+ifndef USE_HOME_BUILD_%Depends%
+USE_HOME_BUILD_%Depends% = no
+endif #ndef USE_HOME_BUILD_%Depends%
 
-%Build%%Depends%_USRCXXFLAGS += \
-%Depends_USRCXXFLAGS%
+ifeq ($(USE_HOME_BUILD_%Depends%),yes)
+#
+# home build %Depends%
+#
+build_%Depends%_USRDEFINES += \
 
-%Build%%Depends%_USRLIBDIRS += \
-%Depends_USRLIBDIRS%
+build_%Depends%_USRINCLUDES += \
+-I$(HOME)/build/%Depends%/include \
 
-%Build%%Depends%_LIBS += \
-%Depends_LIBS%
+build_%Depends%_USRCXXFLAGS += \
 
+build_%Depends%_USRLIBDIRS += \
+-L$(HOME)/build/%Depends%/lib \
+
+build_%Depends%_LIBS += \
+-l%Depends% \
+
+build_%Depends%_FRAMEWORKS += \
+
+else # eq ($(USE_HOME_BUILD_%Depends%),yes)
+#
+# build %Depends%
+#
+build_%Depends%_USRDEFINES += \
+
+build_%Depends%_USRINCLUDES += \
+
+build_%Depends%_USRCXXFLAGS += \
+
+build_%Depends%_USRLIBDIRS += \
+
+build_%Depends%_LIBS += \
+
+build_%Depends%_FRAMEWORKS += \
+
+endif # eq ($(USE_HOME_BUILD_%Depends%),yes)
 )%,Depends)%)%,Depends)%%
 %)%)%

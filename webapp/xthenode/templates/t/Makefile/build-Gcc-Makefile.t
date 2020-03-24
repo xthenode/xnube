@@ -47,14 +47,16 @@
 %Day,%(%else-then(%Day%,%(%day%)%)%)%,%
 %DAY,%(%else-then(%DAY%,%(%toupper(%Day%)%)%)%)%,%
 %day,%(%else-then(%_Day%,%(%tolower(%Day%)%)%)%)%,%
-%depends,%(%else-then(%depends%,%(depends)%)%)%,%
-%Depends,%(%else-then(%Depends%,%(%depends%)%)%)%,%
+%is_depends,%(%else-then(%is_depends%,%(%is_Depends%)%)%)%,%
+%depends,%(%else-then(%if-no(%is_depends%,,%(%depends%)%)%,%(%if-no(%is_depends%,,%(depends)%)%)%)%)%,%
+%Depends,%(%else-then(%if-no(%is_depends%,,%(%Depends%)%)%,%(%if-no(%is_depends%,,%(%depends%)%)%)%)%)%,%
 %DEPENDS,%(%else-then(%DEPENDS%,%(%toupper(%Depends%)%)%)%)%,%
-%depends,%(%else-then(%_Depends%,%(%tolower(%Depends%)%)%)%)%,%
-%framework,%(%else-then(%framework%,%(framework)%)%)%,%
-%Framework,%(%else-then(%Framework%,%(%framework%)%)%)%,%
+%depends,%(%else-then(%_depends%,%(%tolower(%Depends%)%)%)%)%,%
+%is_framework,%(%else-then(%is_framework%,%(%is_Framework%)%)%)%,%
+%framework,%(%else-then(%if-no(%is_framework%,,%(%framework%)%)%,%(%if-no(%is_framework%,,%(framework)%)%)%)%)%,%
+%Framework,%(%else-then(%if-no(%is_framework%,,%(%Framework%)%)%,%(%if-no(%is_framework%,,%(%framework%)%)%)%)%)%,%
 %FRAMEWORK,%(%else-then(%FRAMEWORK%,%(%toupper(%Framework%)%)%)%)%,%
-%framework,%(%else-then(%_Framework%,%(%tolower(%Framework%)%)%)%)%,%
+%framework,%(%else-then(%_framework%,%(%tolower(%Framework%)%)%)%)%,%
 %target,%(%else-then(%target%,%()%)%)%,%
 %Target,%(%else-then(%Target%,%(%target%)%)%)%,%
 %TARGET,%(%else-then(%TARGET%,%(%toupper(%Target%)%)%)%)%,%
@@ -81,57 +83,10 @@
 %title,%(%else-then(%_Title%,%(%tolower(%Title%)%)%)%)%,%
 %%(%
 %%include(%Filepath%/Makefile-file.t)%%
-%%parse(%Depends%,;,,,,%(
-########################################################################
-# %Depends%
-#
-# pkg-config --cflags --libs %Depends%
-#
-
-ifndef USE_HOME_BUILD_%Depends%
-USE_HOME_BUILD_%Depends% = no
-endif
-
-ifeq ($(USE_HOME_BUILD_%Depends%),yes)
-#
-# home build %Depends%
-#
-build_%Depends%_USRDEFINES += \
-
-build_%Depends%_USRINCLUDES += \
--I$(HOME)/build/%Depends%/include \
-
-build_%Depends%_USRCXXFLAGS += \
-
-build_%Depends%_USRLIBDIRS += \
--L$(HOME)/build/%Depends%/lib \
-
-build_%Depends%_LIBS += \
--l%Depends% \
-
-build_%Depends%_FRAMEWORKS += \
-
-else
-#
-# build %Depends%
-#
-build_%Depends%_USRDEFINES += \
-
-build_%Depends%_USRINCLUDES += \
-
-build_%Depends%_USRCXXFLAGS += \
-
-build_%Depends%_USRLIBDIRS += \
-
-build_%Depends%_LIBS += \
-
-build_%Depends%_FRAMEWORKS += \
-
-endif
-)%,Depends)%%
+%%include(%Filepath%/build-Gcc-Makefile-depends.t)%%
 %
 ########################################################################
-# %Framework%
+# build %Framework%
 
 # build %Framework% USRDEFINES
 #

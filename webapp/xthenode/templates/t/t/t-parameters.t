@@ -1,5 +1,5 @@
 %########################################################################
-%# Copyright (c) 1988-2019 $organization$
+%# Copyright (c) 1988-2020 $organization$
 %#
 %# This software is provided by the author and contributors ``as is'' 
 %# and any express or implied warranties, including, but not limited to, 
@@ -13,10 +13,10 @@
 %# or otherwise) arising in any way out of the use of this software, 
 %# even if advised of the possibility of such damage.
 %#
-%#   File: parameters-t.t
+%#   File: t-parameters.t
 %#
 %# Author: $author$
-%#   Date: 7/7/2019
+%#   Date: 2/15/2020
 %########################################################################
 %with(%
 %is_is_lower,%(%else-then(%is_is_lower%,%(%is_is_Lower%)%)%)%,%
@@ -30,7 +30,7 @@
 %IS_UPPERLOWER,%(%else-then(%IS_UPPERLOWER%,%(%toupper(%is_UpperLower%)%)%)%)%,%
 %is_upperlower,%(%else-then(%_is_upperlower%,%(%tolower(%is_UpperLower%)%)%)%)%,%
 %is_parameters,%(%else-then(%is_parameters%,%(%is_Parameters%)%)%)%,%
-%parameters,%(%else-then(%if-no(%is_parameters%,,%(%parameters%)%)%,%(%if-no(%is_parameters%,,%(Parameter)%)%)%)%)%,%
+%parameters,%(%else-then(%if-no(%is_parameters%,,%(%parameters%)%)%,%(%if-no(%is_parameters%,,%()%)%)%)%)%,%
 %Parameters,%(%else-then(%if-no(%is_parameters%,,%(%Parameters%)%)%,%(%if-no(%is_parameters%,,%(%parameters%)%)%)%)%)%,%
 %PARAMETERS,%(%else-then(%PARAMETERS%,%(%toupper(%Parameters%)%)%)%)%,%
 %parameters,%(%else-then(%_parameters%,%(%tolower(%Parameters%)%)%)%)%,%

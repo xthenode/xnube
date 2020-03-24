@@ -79,13 +79,13 @@
 %File,%(%else-then(%File%,%(%file%)%)%)%,%
 %FILE,%(%else-then(%FILE%,%(%toupper(%File%)%)%)%)%,%
 %file,%(%else-then(%_File%,%(%tolower(%File%)%)%)%)%,%
-%title,%(%else-then(%title%,%(build %Makefile%%then-if(%if-then(%Extension%, file)%, .)%%then-if(%Framework%, for )%)%)%)%,%
+%title,%(%else-then(%title%,%(Build specific %Makefile%%then-if(%if-then(%Extension%, file)%, .)%%then-if(%Framework%, for )%)%)%)%,%
 %Title,%(%else-then(%Title%,%(%title%)%)%)%,%
 %TITLE,%(%else-then(%TITLE%,%(%toupper(%Title%)%)%)%)%,%
 %title,%(%else-then(%_Title%,%(%tolower(%Title%)%)%)%)%,%
 %%(%
-%%include(%Filepath%/QtCreator-file.t)%
-UNAME = $$system(uname)
+%%include(%Filepath%/QtCreator-file.t)%%
+%UNAME = $$system(uname)
 
 contains(UNAME,Uname) {
 BUILD_OS = %FRAMEWORK%_OS

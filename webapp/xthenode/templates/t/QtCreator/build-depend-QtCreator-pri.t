@@ -36,7 +36,7 @@
 %Target,%(%else-then(%Target%,%(%target%)%)%)%,%
 %TARGET,%(%else-then(%TARGET%,%(%toupper(%Target%)%)%)%)%,%
 %target,%(%else-then(%_Target%,%(%tolower(%Target%)%)%)%)%,%
-%which,%(%else-then(%which%,%(build)%)%)%,%
+%which,%(%else-then(%which%,%(Build)%)%)%,%
 %Which,%(%else-then(%Which%,%(%which%)%)%)%,%
 %WHICH,%(%else-then(%WHICH%,%(%toupper(%Which%)%)%)%)%,%
 %which,%(%else-then(%_Which%,%(%tolower(%Which%)%)%)%)%,%

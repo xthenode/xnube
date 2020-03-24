@@ -49,6 +49,7 @@
         -->
         <script type="text/javascript" src="../js/Xthenode.js"></script>
         <script type="text/javascript">
+            onLocationInit('Xthenode.html', 'Xthenode-create-qtcreator-pro.html');
         </script>
     </head>
     <!--
@@ -73,6 +74,14 @@
         -->
         <div id="includeHeader" include="Xthenode-header.html">
         <script>includeHTML('includeHeader');</script>
+        </div>
+        <!--
+        =====================================================================
+        === popdown
+        =====================================================================
+        -->
+        <div id="includePopdown" include="Xthenode-popdown.html">
+        <script>includeHTML('includePopdown');</script>
         </div>
         <!--
         =====================================================================
@@ -103,7 +112,9 @@
          onSubmit="return setFormSubmit(getFormValue2('FormTemplate','FormAction','Form'),getFormValue('FormMethod','Form'),'Form')">
             <div class="form">
 
-             File: <input name="File" value=""/> [Framework.pri | Framework.pro]<br/>
+             File: <input name="File" value=""/> [Framework.pri | Framework.pro]
+             <input type="checkbox" name="is_File" value="no" unchecked="checked">no</input>
+             <br/>
     
              Template: <select name="FormTemplate">
              <option value="../templates/t/QtCreator/QtCreator-pri.t">QtCreator.pri</option>
@@ -123,8 +134,12 @@
              <option value="../templates/t/QtCreator/slib-QtCreator-pri.t">Shared-Library-QtCreator.pri</option>
              <option value="../templates/t/QtCreator/os-slib-QtCreator-pro.t">Os-Shared-Library-QtCreator.pro</option>
              <option value="../templates/t/QtCreator/os-slib-QtCreator-pro-config.t">Os-Shared-Library-QtCreator-pro-config</option>
-             <option value=""/>
-             <option value="/sthenode-cgi/cgi">cgi parameters</option>
+             <option value=""></option>
+             <option value="../templates/t/t/functions.t">t functions</option>
+             <option value="../templates/t/t/parameters.t">t parameters</option>
+             <option value=""></option>
+             <option value="/xthenode-cgi/cgi">cgi parameters</option>
+             <option value="/xthenode-cgi/cgicatch">catch cgi parameters</option>
              </select><br/>
 
              </br>
@@ -151,12 +166,15 @@
              <option value="Linux">Linux</option>
              <option value="MacOSX">MacOSX</option>
              <option value="Windows">Windows</option>
-             </select> [Linux] <input type="checkbox" name="is_Os" value="no" checked="yes"/>no<br/>
+             </select> [Linux] <input type="checkbox" name="is_Os" value="no" unchecked="yes"/>no<br/>
 
              <br/>
-             Organization: <input name="Organization" value="$organization$"/><br/>
-             Author: <input name="Author" value="$author$"/><br/>
-             Date: <input name="Date" value=""/><br/>
+             Organization: <input name="Organization" value="$organization$"/>
+             <input type="checkbox" name="is_Organization" value="no" unchecked="checked">no</input><br/>
+             Author: <input name="Author" value="$author$"/>
+             <input type="checkbox" name="is_Author" value="no" unchecked="checked">no</input><br/>
+             Date: <input name="Date" value=""/>
+             <input type="checkbox" name="is_Date" value="no" unchecked="checked">no</input><br/>
 
             <br/>
             Content-Type: <select name="content_type">
@@ -170,7 +188,11 @@
             Action: <select name="FormAction">
             <option value="../templates/t/QtCreator/QtCreator-pro.t">QtCreator-pro.t</option>
             <option value=""></option>
-            <option value="/sthenode-cgi/cgi">cgi parameters</option>
+            <option value="../templates/t/t/functions.t">t functions</option>
+            <option value="../templates/t/t/parameters.t">t parameters</option>
+            <option value=""></option>
+            <option value="/xthenode-cgi/cgi">cgi parameters</option>
+            <option value="/xthenode-cgi/cgicatch">catch cgi parameters</option>
             </select><br/>
             Method: <select name="FormMethod">
             <option value="POST">POST</option>

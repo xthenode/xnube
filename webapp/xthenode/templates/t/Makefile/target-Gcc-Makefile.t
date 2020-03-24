@@ -59,23 +59,28 @@
 %Out,%(%else-then(%Out%,%(%out%)%)%)%,%
 %OUT,%(%else-then(%OUT%,%(%toupper(%Out%)%)%)%)%,%
 %out,%(%else-then(%_Out%,%(%tolower(%Out%)%)%)%)%,%
-%slib,%(%else-then(%slib%,%(%else(%equal(EXE,%OUT%)%%equal(LIB,%OUT%)%,Lib)%)%)%)%,%
+%is_kmod,%(%else-then(%is_kmod%,%(%is_KMod%)%)%)%,%
+%kmod,%(%else-then(%if-no(%is_kmod%,,%(%kmod%)%)%,%(%if-no(%is_kmod%,,%(%else(%equal(EXE,%OUT%)%%equal(SLIB,%OUT%)%%equal(LIB,%OUT%)%,Mod)%)%)%)%)%)%,%
+%KMod,%(%else-then(%if-no(%is_kmod%,,%(%KMod%)%)%,%(%if-no(%is_kmod%,,%(%kmod%)%)%)%)%)%,%
+%KMOD,%(%else-then(%KMOD%,%(%toupper(%KMod%)%)%)%)%,%
+%kmod,%(%else-then(%_kmod%,%(%tolower(%KMod%)%)%)%)%,%
+%slib,%(%else-then(%slib%,%(%else(%equal(KMOD,%OUT%)%%equal(EXE,%OUT%)%%equal(LIB,%OUT%)%,Lib)%)%)%)%,%
 %SLib,%(%else-then(%SLib%,%(%slib%)%)%)%,%
 %SLIB,%(%else-then(%SLIB%,%(%toupper(%SLib%)%)%)%)%,%
 %slib,%(%else-then(%_SLib%,%(%tolower(%SLib%)%)%)%)%,%
-%lib,%(%else-then(%lib%,%(%else(%equal(EXE,%OUT%)%%equal(SLIB,%OUT%)%,Lib)%)%)%)%,%
+%lib,%(%else-then(%lib%,%(%else(%equal(KMOD,%OUT%)%%equal(EXE,%OUT%)%%equal(SLIB,%OUT%)%,Lib)%)%)%)%,%
 %Lib,%(%else-then(%Lib%,%(%lib%)%)%)%,%
 %LIB,%(%else-then(%LIB%,%(%toupper(%Lib%)%)%)%)%,%
 %lib,%(%else-then(%_Lib%,%(%tolower(%Lib%)%)%)%)%,%
-%output,%(%else-then(%output%,%(%else(%Lib%%SLib%,Executable,%if(%SLib%,Shared )%Library)%)%)%)%,%
+%output,%(%else-then(%output%,%(%else(%Lib%%SLib%%KMod%,Executable,%if(%KMod%,%(Kernel Module)%,%(%if(%SLib%,Shared )%Library)%)%)%)%)%)%,%
 %Output,%(%else-then(%Output%,%(%output%)%)%)%,%
 %OUTPUT,%(%else-then(%OUTPUT%,%(%toupper(%Output%)%)%)%)%,%
 %output,%(%else-then(%_Output%,%(%tolower(%Output%)%)%)%)%,%
-%target,%(%else-then(%target%,%(%slib%%lib%%Framework%)%)%)%,%
+%target,%(%else-then(%target%,%(%kmod%%slib%%lib%%Framework%)%)%)%,%
 %Target,%(%else-then(%Target%,%(%target%)%)%)%,%
 %TARGET,%(%else-then(%TARGET%,%(%toupper(%Target%)%)%)%)%,%
 %target,%(%else-then(%_Target%,%(%tolower(%Target%)%)%)%)%,%
-%exe,%(%else-then(%exe%,%(%else(%Lib%%SLib%,%(%if(%equal(%Target%,%Framework%)%,%(_exe)%)%)%)%)%)%)%,%
+%exe,%(%else-then(%exe%,%(%else(%Lib%%SLib%%KMod%,%(%if(%equal(%Target%,%Framework%)%,%(_exe)%)%)%)%)%)%)%,%
 %Exe,%(%else-then(%Exe%,%(%exe%)%)%)%,%
 %EXE,%(%else-then(%EXE%,%(%toupper(%Exe%)%)%)%)%,%
 %exe,%(%else-then(%_Exe%,%(%tolower(%Exe%)%)%)%)%,%
@@ -105,9 +110,9 @@
 #
 # target
 #
-%Target%%Exe%_%OUT%TARGET = %Target%%then-if(%if(%LIB%,%(${LIBEXT})%)%%if(%SLIB%,%(${SLIBEXT})%)%,.)%
+%Target%%Exe%_%OUT%TARGET = %Target%%then-if(%if(%LIB%,%(${LIBEXT})%)%%if(%SLIB%,%(${SLIBEXT})%)%%if(%KMOD%,%(${KMODEXT})%)%,.)%
 
-########################################################################
+%if(%KMOD%,,%(########################################################################
 
 #
 # user c++ flags
@@ -133,18 +138,24 @@ ${%Framework%_USRINCLUDES} \
 %Target%%Exe%_USRLIBDIRS += \
 ${%Framework%_USRLIBDIRS} \
 
-########################################################################
+)%)%########################################################################
 
-%parse(c;cc;cxx;cpp;m;mm,;,,,,%(#
+%if(%KMOD%,%(#
+# %Output% .c sources
+#
+#%Target%_%OUT%_c_SOURCES += \
+#${%FRAMEWORK%_SRC}/%Framework%/base/Base.c \
+
+)%,%(%parse(c;cc;cxx;cpp;m;mm,;,,,,%(#
 # %Output% .%cpp% sources
 #
 #%Target%%Exe%_%OUT%_%toupper(%cpp%)%_SOURCES += \
 #${%FRAMEWORK%_SRC}/%Framework%/base/Base.%cpp% \
 
-)%,cpp)%
+)%,cpp)%)%)%
 ########################################################################
 
-%else(%Lib%,%(#
+%else(%KMod%%Lib%,%(#
 # %Output% libraries
 #
 %Target%%Exe%_LIBS += \

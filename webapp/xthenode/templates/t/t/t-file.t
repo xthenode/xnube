@@ -1,5 +1,5 @@
 %########################################################################
-%# Copyright (c) 1988-2019 $organization$
+%# Copyright (c) 1988-2020 $organization$
 %#
 %# This software is provided by the author and contributors ``as is'' 
 %# and any express or implied warranties, including, but not limited to, 
@@ -13,10 +13,10 @@
 %# or otherwise) arising in any way out of the use of this software, 
 %# even if advised of the possibility of such damage.
 %#
-%#   File: file-t.t
+%#   File: t-file.t
 %#
 %# Author: $author$
-%#   Date: 7/7/2019
+%#   Date: 2/15/2020
 %########################################################################
 %with(%
 %is_file,%(%else-then(%is_file%,%(%is_File%)%)%)%,%

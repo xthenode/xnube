@@ -49,6 +49,7 @@
         -->
         <script type="text/javascript" src="../js/Xthenode.js"></script>
         <script type="text/javascript">
+            onLocationInit('Xthenode.html', 'Xthenode-create-html.html');
         </script>
     </head>
     <!--
@@ -76,6 +77,14 @@
         </div>
         <!--
         =====================================================================
+        === popdown
+        =====================================================================
+        -->
+        <div id="includePopdown" include="Xthenode-popdown.html">
+        <script>includeHTML('includePopdown');</script>
+        </div>
+        <!--
+        =====================================================================
         === dropdown
         =====================================================================
         -->
@@ -89,6 +98,7 @@
         -->
         <ul class="menubar">
             <li><a href="Xthenode-create-html.html">Create .html File</a></li>
+            <li><a href="Xthenode-create-xthenode-html.html">Create Xthenode .html File</a></li>
             <li><a href="Xthenode-create-css.html">Create .css File</a></li>
             <li><a href="Xthenode-create-js.html">Create .js File</a></li>
             <li><a href="Xthenode-create-t.html">Create .t File</a></li>
@@ -105,6 +115,7 @@
 
             <b>&lt;?xml version="</b><input name="XmlVersion" value="1.0"/><b>" encoding="</b><input name="XmlEncoding" value="utf-8"/><b>"&gt;</b><br/>
             <b>&lt;!--</b> File: <input name="File" value="Xthenode"/> <b>--&gt;</b><br/>
+            <br/>
             <b>&lt;html&gt;</b>
             <b>&lt;head&gt;</b>
             <b>&lt;title&gt;</b><input name="Framework" value="Xthenode"/> - <input name="Title" value="Create HTML File"/><b>&lt;/title&gt;</b><br/>
@@ -115,8 +126,12 @@
             Template: <select name="FormTemplate">
             <option value="../templates/t/html/html.t">HTML file</option>
             <option value="../templates/t/html/Xthenode-html.t">Xthenode HTML file</option>
-            <option value="/sthenode-cgi/cgi">cgi parameters</option>
-            <option value=""/>
+            <option value=""></option>
+            <option value="../templates/t/t/functions.t">t functions</option>
+            <option value="../templates/t/t/parameters.t">t parameters</option>
+            <option value=""></option>
+            <option value="/xthenode-cgi/cgi">cgi parameters</option>
+            <option value="/xthenode-cgi/cgicatch">catch cgi parameters</option>
             </select>
             <br/>
 
@@ -131,8 +146,12 @@
             </select><br/>
             Action: <select name="FormAction">
             <option value="../templates/t/html/html.t">html.t</option>
-            <option value="/sthenode-cgi/cgi">cgi parameters</option>
             <option value=""></option>
+            <option value="../templates/t/t/functions.t">t functions</option>
+            <option value="../templates/t/t/parameters.t">t parameters</option>
+            <option value=""></option>
+            <option value="/xthenode-cgi/cgi">cgi parameters</option>
+            <option value="/xthenode-cgi/cgicatch">catch cgi parameters</option>
             </select><br/>
             Method: <select name="FormMethod">
             <option value="POST">POST</option>

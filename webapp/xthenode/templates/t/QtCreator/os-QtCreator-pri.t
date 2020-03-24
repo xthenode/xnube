@@ -59,10 +59,16 @@
 %Target,%(%else-then(%Target%,%(%target%)%)%)%,%
 %TARGET,%(%else-then(%TARGET%,%(%toupper(%Target%)%)%)%)%,%
 %target,%(%else-then(%_Target%,%(%tolower(%Target%)%)%)%)%,%
-%os,%(%else-then(%os%,%(%if-no(%is_Os%,,%(Linux)%,%(Os)%)%)%)%)%,%
-%Os,%(%else-then(%Os%,%(%os%)%)%)%,%
+%is_os2,%(%else-then(%is_os2%,%(%is_Os2%)%)%)%,%
+%os2,%(%else-then(%if-no(%is_os2%,,%(%os2%)%)%,%(%if-no(%is_os2%,,%()%)%)%)%)%,%
+%Os2,%(%else-then(%if-no(%is_os2%,,%(%Os2%)%)%,%(%if-no(%is_os2%,,%(%os2%)%)%)%)%)%,%
+%OS2,%(%else-then(%OS2%,%(%toupper(%Os2%)%)%)%)%,%
+%os2,%(%else-then(%_os2%,%(%tolower(%Os2%)%)%)%)%,%
+%is_os,%(%else-then(%is_os%,%(%is_Os%)%)%)%,%
+%os,%(%else-then(%if-no(%is_os%,,%(%os%)%)%,%(%if-no(%is_os%,,%(%else-then(%Os2%,Os)%)%)%)%)%)%,%
+%Os,%(%else-then(%if-no(%is_os%,,%(%Os%)%)%,%(%if-no(%is_os%,,%(%os%)%)%)%)%)%,%
 %OS,%(%else-then(%OS%,%(%toupper(%Os%)%)%)%)%,%
-%os,%(%else-then(%_Os%,%(%tolower(%Os%)%)%)%)%,%
+%os,%(%else-then(%_os%,%(%tolower(%Os%)%)%)%)%,%
 %pro,%(%else-then(%pro%,%(pri)%)%)%,%
 %Pro,%(%else-then(%Pro%,%(%pro%)%)%)%,%
 %PRO,%(%else-then(%PRO%,%(%toupper(%Pro%)%)%)%)%,%
@@ -79,7 +85,7 @@
 %File,%(%else-then(%File%,%(%file%)%)%)%,%
 %FILE,%(%else-then(%FILE%,%(%toupper(%File%)%)%)%)%,%
 %file,%(%else-then(%_File%,%(%tolower(%File%)%)%)%)%,%
-%title,%(%else-then(%title%,%(%if-then(%Os%, )%%Makefile%%then-if(%if-then(%Extension%, file)%, .)%%then-if(%Framework%, for )%)%)%)%,%
+%title,%(%else-then(%title%,%(%if-then(%Os%, specific )%%Makefile%%then-if(%if-then(%Extension%, file)%, .)%%then-if(%Framework%, for )%)%)%)%,%
 %Title,%(%else-then(%Title%,%(%title%)%)%)%,%
 %TITLE,%(%else-then(%TITLE%,%(%toupper(%Title%)%)%)%)%,%
 %title,%(%else-then(%_Title%,%(%tolower(%Title%)%)%)%)%,%

@@ -1,5 +1,5 @@
 %########################################################################
-%# Copyright (c) 1988-2019 $organization$
+%# Copyright (c) 1988-2020 $organization$
 %#
 %# This software is provided by the author and contributors ``as is'' 
 %# and any express or implied warranties, including, but not limited to, 
@@ -13,10 +13,10 @@
 %# or otherwise) arising in any way out of the use of this software, 
 %# even if advised of the possibility of such damage.
 %#
-%#   File: t.t
+%#   File: t-file-parameters.t
 %#
 %# Author: $author$
-%#   Date: 7/7/2019
+%#   Date: 2/23/2020
 %########################################################################
 %with(%
 %is_include_path,%(%else-then(%is_include_path%,%(%is_Include_path%)%)%)%,%
@@ -24,18 +24,31 @@
 %Include_path,%(%else-then(%if-no(%is_include_path%,,%(%Include_path%)%)%,%(%if-no(%is_include_path%,,%(%include_path%)%)%)%)%)%,%
 %INCLUDE_PATH,%(%else-then(%INCLUDE_PATH%,%(%toupper(%Include_path%)%)%)%)%,%
 %include_path,%(%else-then(%_include_path%,%(%tolower(%Include_path%)%)%)%)%,%
-%is_include,%(%else-then(%is_include%,%(%is_Include%)%)%)%,%
-%include,%(%else-then(%if-no(%is_include%,,%(%include%)%)%,%(%if-no(%is_include%,,%(t-file.t)%)%)%)%)%,%
-%Include,%(%else-then(%if-no(%is_include%,,%(%Include%)%)%,%(%if-no(%is_include%,,%(%include%)%)%)%)%)%,%
-%INCLUDE,%(%else-then(%INCLUDE%,%(%toupper(%Include%)%)%)%)%,%
-%include,%(%else-then(%_include%,%(%tolower(%Include%)%)%)%)%,%
+%is_extension,%(%else-then(%is_extension%,%(%is_Extension%)%)%)%,%
+%extension,%(%else-then(%if-no(%is_extension%,,%(%extension%)%)%,%(%if-no(%is_extension%,,%(t)%)%)%)%)%,%
+%Extension,%(%else-then(%if-no(%is_extension%,,%(%Extension%)%)%,%(%if-no(%is_extension%,,%(%extension%)%)%)%)%)%,%
+%EXTENSION,%(%else-then(%EXTENSION%,%(%toupper(%Extension%)%)%)%)%,%
+%extension,%(%else-then(%_extension%,%(%tolower(%Extension%)%)%)%)%,%
+%is_Parameters,%(%else-then(%is_Parameters%,%(%is_parameters%)%)%)%,%
+%Parameters,%(%else-then(%if-no(%is_Parameters%,,%(%Parameters%)%)%,%(%if-no(%is_Parameters%,,%
+%%(Organization=$organization$;Author=$author$;Name=Name%
+%;File=%%else-then%(()%%%File%%%(,)%%%Name%%%())%%%%
+%;Base=%%else-then%(()%%%filebase%(()%%%File%%%())%%%%(,)%%%%(()%%%File%%%())%%%%())%%%%
+%;Extension=%%else-then%(()%%%fileextension%(()%%%File%%%())%%%%(,)%%%%(()%%Extension%%())%%%%())%%%%
+%)%%
+%)%)%)%)%,%
 %%(%
-%%include(%include_path%/t-file.t)%%
+%%include(%Include_path%/t-file.t)%%
 %%%with%(()%%%
-%if(%if-no(%is_Include%,,%(yes)%)%,%(%
+%
+%%if(%if-no(%is_Include%,,%(yes)%)%,%(%
 %%with(Parameters,%(Include_path=%%filepath%(()%%%input%%%())%%%)%,%
 %%(%include(%include_path%/t-parameters.t)%)%)%%
-%)%)%%include(%include_path%/t-parameters.t)%%%%%%(()%%%
-%if(%if-no(%is_Include%,,%(%Include%)%)%,%(%%%%include%(()%%%Include_path%%%then-if(%Include%,/)%%())%%%%%
-)%)%%%%())%%%%())%%%%
+%)%)%%
+%%include(%Include_path%/t-parameters.t)%%
+%%%%%%(()%%%
+%
+%%if(%if-no(%is_Include%,,%(%Include%)%)%,%(%%%%include%(()%%%Include_path%%%then-if(%Include%,/)%%())%%%%%
+)%)%%
+%%%%())%%%%())%%%%
 %)%)%

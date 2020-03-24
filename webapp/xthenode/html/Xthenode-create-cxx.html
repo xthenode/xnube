@@ -49,6 +49,7 @@
         -->
         <script type="text/javascript" src="../js/Xthenode.js"></script>
         <script type="text/javascript">
+            onLocationInit('Xthenode.html', 'Xthenode-create-cxx.html');
         </script>
     </head>
     <!--
@@ -73,6 +74,14 @@
         -->
         <div id="includeHeader" include="Xthenode-header.html">
         <script>includeHTML('includeHeader');</script>
+        </div>
+        <!--
+        =====================================================================
+        === popdown
+        =====================================================================
+        -->
+        <div id="includePopdown" include="Xthenode-popdown.html">
+        <script>includeHTML('includePopdown');</script>
         </div>
         <!--
         =====================================================================
@@ -118,8 +127,11 @@
              <option value="../templates/t/cxx/h-hxx-c-cxx.t" selected="selected">C/C++ file</option>
              <option value="../templates/t/cxx/hxx-cxx.t">C++ file</option>
              <option value="../templates/t/cxx/h-c.t">C file</option>
-             <option value="/xthenode-cgi/cgi">cgi parameters</option>
              <option value=""/>
+             <option value="../templates/t/cxx/cClass-hxx-cxx.t">c C++ class</option>
+             <option value="../templates/t/cxx/cTFunction-hxx-cxx.t">cTFunction C++ class</option>
+             <option value=""/>
+             <option value="/xthenode-cgi/cgi">cgi parameters</option>
              </select>
              <br/>
              <br/>
@@ -131,7 +143,7 @@
             [%namespace%]
             <input type="checkbox" name="is_File_ifndef" value="no" unchecked=""/>no
             <br/>
-            <b>#include "</b><input name="Include" value="xos/base/Base.hxx"/><b>"</b>[xos/base/Base.hxx]
+            <b>#include "</b><input name="Include" value=""/><b>"</b>[xos/base/Base.hxx]
             <input type="checkbox" name="is_Include" value="no" unchecked=""/>no<br/>
             <b>#include &lt;</b><input name="Sys_include" value=""/><b>&gt;</b>[string]
             <input type="checkbox" name="is_Sys_include" value="no" checked="checked"/>no<br/>
@@ -144,13 +156,58 @@
             <b>template &lt;</b> <input name="Template" value=""/><b>&gt;</b>
             <input type="checkbox" name="is_Template" value="no" unchecked=""/>no<br/>
             <b>class</b> <input name="Class" value=""/>[Class]
-            <input type="checkbox" name="is_Class" value="no" unchecked=""/>no<br/>
+            <input type="checkbox" name="is_Class" value="no" unchecked=""/>no
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>typedef </b><select name="Typedef_derives">
+            <option value="Derives">Derives</option>
+            <option value="derives">derives</option>
+            <option value=""></option>
+            </select><b></b>
+            <input type="checkbox" name="is_Typedef_derives" value="no" unchecked="checked">no</input><br/>
             <b>: virtual public</b> <input name="Implements" value=""/>[Implement]
-            <input type="checkbox" name="is_Implements" value="no" unchecked=""/>no<br/>
+            <input type="checkbox" name="is_Implements" value="no" unchecked=""/>no
+            <b></b>&nbsp;&nbsp;&nbsp;&nbsp;<b>typedef </b><select name="Typedef_implements">
+            <option value="Implements">Implements</option>
+            <option value="implements">implements</option>
+            <option value=""></option>
+            </select><b></b>
+            <input type="checkbox" name="is_Typedef_implements" value="no" unchecked="checked">no</input><br/>
             <b>, public</b> <input name="Extends" value=""/>[Extend]
-            <input type="checkbox" name="is_Extends" value="no" unchecked=""/>no<br>
-            <b>{}; /// class</b><br/>
+            <input type="checkbox" name="is_Extends" value="no" unchecked=""/>no
+            <b></b>&nbsp;&nbsp;&nbsp;&nbsp;<b>typedef </b><select name="Typedef_extends">
+            <option value="Extends">Extends</option>
+            <option value="extends">extends</option>
+            <option value=""></option>
+            </select><b></b>
+            <input type="checkbox" name="is_Typedef_extends" value="no" unchecked="checked">no</input><b> {</b><br/>
+            <b></b><select name="Copy_constructor_access">
+            <option value="public">public</option>
+            <option value="protected">protected</option>
+            <option value="private">private</option>
+            </select><b>:</b>
+            <input type="checkbox" name="Copy_constructor" value="explicit" unchecked="checked"><b>explicit</b></input>
+            <b>&nbsp;&nbsp;(const &amp; </b>copy<b>) {}</b>
+            <input type="checkbox" name="is_Copy_constructor" value="no" unchecked="checked">no</input>
             <br/>
+            <b></b><select name="Constructor_access">
+            <option value="public">public</option>
+            <option value="protected">protected</option>
+            <option value="private">private</option>
+            </select><b>:</b>
+            <input type="checkbox" name="Constructor" value="explicit" unchecked="checked"><b>explicit</b></input>
+            <b>&nbsp;&nbsp;() {}</b>
+            <input type="checkbox" name="is_Constructor" value="no" unchecked="checked">no</input>
+            <br/>
+            <b></b><select name="Destructor_access">
+            <option value="public">public</option>
+            <option value="protected">protected</option>
+            <option value="private">private</option>
+            </select><b>:</b>
+            <input type="checkbox" name="Destructor" value="virtual" checked="checked"><b>virtual</b></input>
+            <b>&nbsp;&nbsp;~() {}</b>
+            <input type="checkbox" name="is_Destructor" value="no" unchecked="checked">no</input>
+            <input type="hidden" name="is_is_Destructor" value="no" unchecked="checked"></input>
+            <br/>
+            <b>}; /// class</b><br/>
             <b>} /// namespace</b><br/>
 
             <br/>
@@ -164,8 +221,8 @@
             </select><br/>
             Action: <select name="FormAction">
             <option value="../templates/t/cxx/h-hxx-c-cxx.t">h-hxx-c-cxx.t</option>
-            <option value="/sthenode-cgi/cgi">cgi parameters</option>
             <option value=""></option>
+            <option value="/sthenode-cgi/cgi">cgi parameters</option>
             </select><br/>
             Method: <select name="FormMethod">
             <option value="POST">POST</option>

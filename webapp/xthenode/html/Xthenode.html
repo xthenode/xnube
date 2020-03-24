@@ -37,6 +37,7 @@
         <link rel="stylesheet" type="text/css" href="../css/Xthenode.css"></link>
         <link rel="stylesheet" type="text/css" href="../css/Xthenode-header.css"></link>
         <link rel="stylesheet" type="text/css" href="../css/Xthenode-dropdown.css"></link>
+        <link rel="stylesheet" type="text/css" href="../css/Xthenode-menubar.css"></link>
         <link rel="stylesheet" type="text/css" href="../css/Xthenode-logo.css"></link>
         <style type="text/css">
         </style>
@@ -48,6 +49,7 @@
         -->
         <script type="text/javascript" src="../js/Xthenode.js"></script>
         <script type="text/javascript">
+            onLocationInit('.', 'Xthenode.html');
         </script>
     </head>
 
@@ -76,6 +78,14 @@
         </div>
         <!--
         =====================================================================
+        === popdown
+        =====================================================================
+        -->
+        <div id="includePopdown" include="Xthenode-popdown.html">
+        <script>includeHTML('includePopdown');</script>
+        </div>
+        <!--
+        =====================================================================
         === dropdown
         =====================================================================
         -->
@@ -87,9 +97,9 @@
         === header
         =====================================================================
         -->
-        <div id="includeFooter" include="Xthenode-footer.html">
+        <!--div id="includeFooter" include="Xthenode-footer.html">
         <script>includeHTML('includeFooter');</script>
-        </div>
+        </div-->
 
     </body>
 </html>

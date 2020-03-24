@@ -93,6 +93,10 @@ ifdef EXETARGET
 EXEINSTALL = install-exe
 endif
 
+ifdef KMODTARGET
+KMODINSTALL = install-kmod
+endif
+
 LIB_C_OBJS=$(LIB_C_SOURCES:.c=.o)
 LIB_M_OBJS=$(LIB_M_SOURCES:.m=.o)
 LIB_CC_OBJS=$(LIB_CC_SOURCES:.cc=.o)
@@ -117,7 +121,10 @@ EXE_CPP_OBJS=$(EXE_CPP_SOURCES:.cpp=.o)
 EXE_CXX_OBJS=$(EXE_CXX_SOURCES:.cxx=.o)
 EXE_OBJS = $(EXE_C_OBJS) $(EXE_M_OBJS) $(EXE_CC_OBJS) $(EXE_MM_OBJS) $(EXE_CPP_OBJS) $(EXE_CXX_OBJS)
 
-ALL_OBJS = $(OBJS) $(LIB_OBJS) $(SLIB_OBJS) $(EXE_OBJS)
+KMOD_C_OBJS=$(KMOD_C_SOURCES:.c=.o)
+KMOD_OBJS = $(KMOD_C_OBJS) 
+
+ALL_OBJS = $(OBJS) $(LIB_OBJS) $(SLIB_OBJS) $(EXE_OBJS) $(KMOD_OBJS)
 ALL_TARGETS = $(EXETARGET) $(LIBTARGET) $(SLIBTARGET) $(USRTARGET)
 
 #
@@ -126,7 +133,7 @@ ALL_TARGETS = $(EXETARGET) $(LIBTARGET) $(SLIBTARGET) $(USRTARGET)
 
 all: ${LIBTARGET} ${SLIBTARGET} ${KMODTARGET} ${EXETARGET}
 
-install: ${LIBINSTALL} ${SLIBINSTALL} ${EXEINSTALL}
+install: ${LIBINSTALL} ${SLIBINSTALL} ${KMODINSTALL} ${EXEINSTALL}
 
 again: clean all
 
@@ -187,6 +194,15 @@ ar:
 cxxld:
 	@echo "CXXLD =" $(CXXLD) ${USRINCLUDES} ${INCLUDES} $(LDFLAGS) -o ${EXETARGET} $(EXE_OBJS) $(EXE_USROBJS) $(LIBS) $(STDLIBS)
 
+kmodflags:
+	@echo "KERNEL_CFLAGS =" $(KERNEL_CFLAGS)
+
+kmodld:
+	@echo "KERNEL_LD =" $(KERNEL_LD) $(KERNEL_LDFLAGS) -o $@ $(KMOD_OBJS) $(KMOD_USROBJS)
+
+kmod_objs:
+	@echo "KMOD_OBJS =" $(KMOD_OBJS)
+
 exe_objs:
 	@echo "EXE_OBJS =" $(EXE_OBJS)
 
@@ -196,7 +212,7 @@ slib_objs:
 lib_objs:
 	@echo "LIB_OBJS =" $(LIB_OBJS)
 
-objs: lib_objs slib_objs exe_objs
+objs: lib_objs slib_objs exe_objs kmod_objs
 
 lib_sources:
 	@echo "LIB_SOURCES =" $(LIB_C_SOURCES) $(LIB_CXX_SOURCES) $(LIB_CPP_SOURCES) $(LIB_M_SOURCES) $(LIB_MM_SOURCES)
@@ -227,6 +243,11 @@ install-exe: ${EXETARGET} ${INSBIN}
 	@(echo "Installing Exe - " ${EXETARGET}...;\
 	  ((cp -r $(BINDIR)/${EXETARGET} $(INSBIN)) || (exit 1));\
 	  echo ..."Installed Exe - " ${EXETARGET})
+
+install-kmod: ${KMODTARGET} ${INSLIB}
+	@(echo "Installing Kernel Module - " ${KMODTARGET}...;\
+	  ((cp -r $(LIBDIR)/${KMODTARGET} $(INSLIB)) || (exit 1));\
+	  echo ..."Installed Kernel Module - " ${KMODTARGET})
 
 ${INSBIN}:
 	@(echo "Makeing Binary Directory - " ${INSBIN}...;\
@@ -274,6 +295,15 @@ ${EXETARGET}: ${EXEDEP} ${EXE_OBJS} ${BINDIR}
 	@$(STRIP) $@
 	@$(MV) $@ $(BINDIR)
 
+${KMODTARGET}: ${KMODDEP} ${KMOD_OBJS} ${LIBDIR}
+	@echo "Building Kernel Module" $@ ...
+	@for dir in $(KMOD_DIRS); do \
+		echo "Make $$dir" ; \
+		(cd $$dir && make) || (echo "Make $$dir Failed") ; \
+	done
+	@$(KERNEL_LD) $(KERNEL_LDFLAGS) -o $@ $(KMOD_OBJS) $(KMOD_USROBJS)
+	@$(MV) $@ $(LIBDIR)
+
 #
 # compile
 #
@@ -310,6 +340,10 @@ $(SLIB_C_SOURCES:.c=.o): %%.o: %%.c
 $(EXE_C_SOURCES:.c=.o): %%.o: %%.c
 	@echo Compiling $(BUILD_TYPE) $< ...
 	@$(CC) -c $(CFLAGS) -o $@ $<
+
+$(KMOD_C_SOURCES:.c=.o): %%.o: %%.c
+	@echo Compiling Kernel $(BUILD_TYPE) $< ...
+	@$(KERNEL_CC) -c $(KERNEL_CFLAGS) -o $@ $<
 
 #
 # C++

@@ -49,6 +49,7 @@
         -->
         <script type="text/javascript" src="../js/Xthenode.js"></script>
         <script type="text/javascript">
+            onLocationInit('Xthenode.html', 'Xthenode-create-gcc-makefile.html');
         </script>
     </head>
     <!--
@@ -73,6 +74,14 @@
         -->
         <div id="includeHeader" include="Xthenode-header.html">
         <script>includeHTML('includeHeader');</script>
+        </div>
+        <!--
+        =====================================================================
+        === popdown
+        =====================================================================
+        -->
+        <div id="includePopdown" include="Xthenode-popdown.html">
+        <script>includeHTML('includePopdown');</script>
         </div>
         <!--
         =====================================================================
@@ -103,27 +112,18 @@
          onSubmit="return setFormSubmit(getFormValue2('FormTemplate','FormAction','Form'),getFormValue('FormMethod','Form'),'Form')">
             <div class="form">
 
-             File: <input name="File" value=""/> [Makedefines | Makefile | Makerules | Makedirs]<br/>
-    
-             </br>
-             Depends: <input name="Depends" value=""/><br/>
-             Framework: <input name="Framework" value=""/></br>
-             Version: <input name="version_Major" value="0"/>
-             .<input name="version_Minor" value="0"/>
-             .<input name="version_Release" value="0"/><br/>
-             Target: <input name="Target" value=""/><br/>
-             Os: <input name="Os_input" value=""/><select name="Os">
-             <option value=""></option>
-             <option value="Linux">Linux</option>
-             <option value="MacOSX">MacOSX</option>
-             <option value="Windows">Windows</option>
-             </select> [Linux]<input type="checkbox" name="IsOs" value="no" checked="yes"/>no<br/>
-             Style: <input name="Style" value=""/> [xos]<input type="checkbox" name="IsStyle" value="no" checked="yes"/>no<br/>
-             Language: <input name="Language" value=""/> [cpp]<input type="checkbox" name="IsLanguage" value="no" checked="yes"/>no<br/>
+             File: <input name="File" value=""/> [Makedefines | Makefile | Makerules | Makedirs]
+             <input type="checkbox" name="is_File" value="no" unchecked="checked">no</input>
+             <br/>
              Template: <select name="FormTemplate">
              <option value="../templates/t/Makefile/Gcc-Makefile.t">Makefile</option>
              <option value="../templates/t/Makefile/os-Gcc-Makefile.t">Os-Makefile</option>
              <option value="../templates/t/Makefile/build-Gcc-Makefile.t">Build-Makefile</option>
+             <option value="../templates/t/Makefile/build-Gcc-Makedefines.t">Build-Makedefines</option>
+             <option value=""/>
+             <option value="../templates/t/Makefile/Gcc-Makedefines.t">Makedefines</option>
+             <option value="../templates/t/Makefile/Gcc-Makerules.t">Makerules</option>
+             <option value="../templates/t/Makefile/Gcc-Makedirs.t">Makedirs</option>
              <option value=""/>
              <option value="../templates/t/Makefile/lib-Gcc-Makefile.t">Library-Makefile</option>
              <option value="../templates/t/Makefile/os-lib-Gcc-Makefile.t">Os-Library-Makefile</option>
@@ -134,27 +134,66 @@
              <option value="../templates/t/Makefile/slib-Gcc-Makefile.t">Shared-Library-Makefile</option>
              <option value="../templates/t/Makefile/os-slib-Gcc-Makefile.t">Os-Shared-Library-Makefile</option>
              <option value=""/>
-             <option value="../templates/t/Makefile/Gcc-Makedefines.t">Makedefines</option>
-             <option value="../templates/t/Makefile/build-Gcc-Makedefines.t">Build-Makedefines</option>
+             <option value="../templates/t/Makefile/kmod-Gcc-Makefile.t">Kernel-Module-Makefile</option>
+             <option value="../templates/t/Makefile/os-kmod-Gcc-Makefile.t">Os-Kernel-Module-Makefile</option>
              <option value=""/>
-             <option value="../templates/t/Makefile/Gcc-Makerules.t">Makerules</option>
-             <option value="../templates/t/Makefile/Gcc-Makedirs.t">Makedirs</option>
+             <option value="../templates/t/Makefile/Thirdparty-Gcc-Makefile.t">Thirdparty-Makefile</option>
              <option value=""/>
-             <option value="../templates/t/Makefile/meta-Gcc-Makefile.t">Meta-Makefile</option>
-             <option value="../templates/t/Makefile/meta-os-Gcc-Makefile.t">Meta-Os-Makefile</option>
-             <option value=""/>
-             <option value="../templates/t/Makefile/meta-Gcc-Makedefines.t">Meta-Makedefines</option>
-             <option value="../templates/t/Makefile/meta-Gcc-Makerules.t">Meta-Makerules</option>
-             <option value="../templates/t/Makefile/meta-Gcc-Makedirs.t">Meta-Makedirs</option>
-             <option value="../templates/t/Makefile/meta-config.t">Meta-config</option>
-             <option value=""/>
-             <option value="thirdparty-Gcc-Makefile.t">Thirdparty-Makefile</option>
+             <option value="../templates/t/t/functions.t">t functions</option>
+             <option value="../templates/t/t/parameters.t">t parameters</option>
+             <option value=""></option>
+             <option value="/xthenode-cgi/cgi">cgi parameters</option>
+             <option value="/xthenode-cgi/cgicatch">catch cgi parameters</option>
              </select><br/>
     
+             </br>
+             Depends: <input name="Depends" value=""/>
+             <input name="is_Depends" value="no" type="checkbox" checked="checked">no</input><br/>
+             Framework: <input name="Framework" value=""/>
+             <input name="is_Framework" value="no" type="checkbox" unchecked="checked">no</input><br/>
+             Version: <input name="Version_major" value="0"/>
+             .<input name="Version_minor" value="0"/>
+             .<input name="Version_release" value="0"/>
+             <input name="is_Version" value="no" type="checkbox" unchecked="checked">no</input><br/>
+             <b></b>Archived:<select name="Archived">
+             <option value="tar">tar</option>
+             <option value="zip">zip</option>
+             </select><b></b>
+             <input type="checkbox" name="is_Archived" value="no" unchecked="checked">no</input>
+             <b></b>Compressed:<select name="Compressed">
+             <option value="gz">gz</option>
+             <option value="bz2">bz2</option>
+             <option value="xz">xz</option>
+             </select><b></b>
+             <input type="checkbox" name="is_Compressed" value="no" unchecked="checked">no</input><br/>
+             Target: <input name="Target" value=""/>
+             <input name="is_Target" value="no" type="checkbox" unchecked="checked">no</input><br/>
+             Source: <select name="Source">
+                 <option value="source">source</option>
+                 <option value="src" selected="selected">src</option>
+                 <option value=""></option>
+             </select>[src]
+             <input name="is_Source" value="no" type="checkbox" unchecked="checked">no</input><br/>
+             Include: <select name="Include">
+                 <option value="include">include</option>
+                 <option value="inc">inc</option>
+                 <option value=""></option>
+             </select>[include]
+             <input name="is_Include" value="no" type="checkbox" unchecked="checked">no</input><br/>
+             Os: <input name="Os" value=""/><select name="Os_select">
+             <option value=""></option>
+             <option value="Linux">Linux</option>
+             <option value="MacOSX">MacOSX</option>
+             <option value="Windows">Windows</option>
+             </select> [Linux] <input type="checkbox" name="is_Os" value="no" unchecked="yes"/>no<br/>
+    
              <br/>
-             Organization: <input name="Organization" value="$organization$"/><br/>
-             Author: <input name="Author" value="$author$"/><br/>
-             Date: <input name="Date" value=""/><br/>
+             Organization: <input name="Organization" value="$organization$"/>
+             <input type="checkbox" name="is_Organization" value="no" unchecked="checked">no</input><br/>
+             Author: <input name="Author" value="$author$"/>
+             <input type="checkbox" name="is_Author" value="no" unchecked="checked">no</input><br/>
+             Date: <input name="Date" value=""/>
+             <input type="checkbox" name="is_Date" value="no" unchecked="checked">no</input><br/>
 
             <br/>
             Content-Type: <select name="content_type">
@@ -167,8 +206,12 @@
             </select><br/>
             Action: <select name="FormAction">
             <option value="../templates/t/Makefile/Gcc-Makefile.t">Gcc-Makefile.t</option>
-            <option value="/sthenode-cgi/cgi">cgi parameters</option>
             <option value=""></option>
+            <option value="../templates/t/t/functions.t">t functions</option>
+            <option value="../templates/t/t/parameters.t">t parameters</option>
+            <option value=""></option>
+            <option value="/xthenode-cgi/cgi" selected="selected">cgi parameters</option>
+            <option value="/xthenode-cgi/cgicatch">catch cgi parameters</option>
             </select><br/>
             Method: <select name="FormMethod">
             <option value="POST">POST</option>
