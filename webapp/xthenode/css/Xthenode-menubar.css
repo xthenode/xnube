@@ -40,6 +40,9 @@
 .menubar li {
   float: left;
 }
+.menubar .home {
+  float: right;
+}
 .menubar li a {
   display: block;
   color: black;

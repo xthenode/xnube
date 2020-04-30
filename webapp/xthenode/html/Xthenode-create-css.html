@@ -101,7 +101,7 @@
             <li><a href="Xthenode-create-html.html">Create .html File</a></li>
             <li><a href="Xthenode-create-js.html">Create .js File</a></li>
             <li><a href="Xthenode-create-t.html">Create .t File</a></li>
-            <li><a href="Xthenode.html">Home</a></li>
+            <li class="home"><div><a href="Xthenode.html">Home</a></div></li>
         </ul>
         <!--
         =====================================================================
@@ -129,8 +129,13 @@
             <option value=""></option>
             </select><br/>
             Action: <select name="FormAction">
-            <option value="../templates/t/css/css.t">cxx.t</option>
-            <option value="/sthenode-cgi/cgi">cgi parameters</option>
+            <option value="../templates/t/css/css.t">css.t</option>
+            <option value=""></option>
+            <option value="/xthenode-cgi/cgi">cgi parameters</option>
+            <option value="/xthenode-cgi/cgicatch">catch cgi parameters</option>
+            <option value=""/>
+            <option value="http://localhost:8080/xthenode-http/http">http parameters</option>
+            <option value="http://localhost:8080/xthenode-http/httpcatch">catch http parameters</option>
             <option value=""></option>
             </select><br/>
             Method: <select name="FormMethod">

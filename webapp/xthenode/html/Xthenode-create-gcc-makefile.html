@@ -101,7 +101,7 @@
             <li><a href="Xthenode-create-qtcreator-pro.html">Create QtCreator project</a></li>
             <li><a href="Xthenode-create-cxx.html">Create C/C++ File</a></li>
             <li><a href="Xthenode-create-t.html">Create .t File</a></li>
-            <li><a href="Xthenode.html">Home</a></li>
+            <li class="home"><div><a href="Xthenode.html">Home</a></div></li>
         </ul>
         <!--
         =====================================================================
@@ -144,6 +144,9 @@
              <option value=""></option>
              <option value="/xthenode-cgi/cgi">cgi parameters</option>
              <option value="/xthenode-cgi/cgicatch">catch cgi parameters</option>
+             <option value=""/>
+             <option value="http://localhost:8080/xthenode-http/http">http parameters</option>
+             <option value="http://localhost:8080/xthenode-http/httpcatch">catch http parameters</option>
              </select><br/>
     
              </br>
@@ -185,7 +188,7 @@
              <option value="Linux">Linux</option>
              <option value="MacOSX">MacOSX</option>
              <option value="Windows">Windows</option>
-             </select> [Linux] <input type="checkbox" name="is_Os" value="no" unchecked="yes"/>no<br/>
+             </select> [Linux] <input type="checkbox" name="is_Os" value="no" checked="yes"/>no<br/>
     
              <br/>
              Organization: <input name="Organization" value="$organization$"/>
@@ -210,8 +213,11 @@
             <option value="../templates/t/t/functions.t">t functions</option>
             <option value="../templates/t/t/parameters.t">t parameters</option>
             <option value=""></option>
-            <option value="/xthenode-cgi/cgi" selected="selected">cgi parameters</option>
+            <option value="/xthenode-cgi/cgi">cgi parameters</option>
             <option value="/xthenode-cgi/cgicatch">catch cgi parameters</option>
+            <option value=""/>
+            <option value="http://localhost:8080/xthenode-http/http">http parameters</option>
+            <option value="http://localhost:8080/xthenode-http/httpcatch">catch http parameters</option>
             </select><br/>
             Method: <select name="FormMethod">
             <option value="POST">POST</option>
