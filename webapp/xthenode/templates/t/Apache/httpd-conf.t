@@ -30,7 +30,7 @@
 %HOST,%(%else-then(%HOST%,%(%toupper(%Host%)%)%)%)%,%
 %host,%(%else-then(%_host%,%(%tolower(%Host%)%)%)%)%,%
 %is_user,%(%else-then(%is_user%,%(%is_User%)%)%)%,%
-%user,%(%else-then(%if-no(%is_user%,,%(%user%)%)%,%(%if-no(%is_user%,,%(%else-then(%getenv(HTTPD_USER)%,%(%getenv(USER)%)%)%)%)%)%)%)%,%
+%user,%(%else-then(%if-no(%is_user%,,%(%user%)%)%,%(%if-no(%is_user%,,%(%else-then(%getenv(HTTPD_USER)%,%(%else-then(%getenv(USER)%,%(nobody)%)%)%)%)%)%)%)%)%,%
 %User,%(%else-then(%if-no(%is_user%,,%(%User%)%)%,%(%if-no(%is_user%,,%(%user%)%)%)%)%)%,%
 %USER,%(%else-then(%USER%,%(%toupper(%User%)%)%)%)%,%
 %user,%(%else-then(%_user%,%(%tolower(%User%)%)%)%)%,%
@@ -65,7 +65,7 @@
 %SERVERADMIN,%(%else-then(%SERVERADMIN%,%(%toupper(%ServerAdmin%)%)%)%)%,%
 %serveradmin,%(%else-then(%_serveradmin%,%(%tolower(%ServerAdmin%)%)%)%)%,%
 %is_home,%(%else-then(%is_home%,%(%is_Home%)%)%)%,%
-%home,%(%else-then(%if-no(%is_home%,,%(%home%)%)%,%(%if-no(%is_home%,,%(%else-then(%getenv(HTTPD_HOME)%,%(%getenv(HOME)%)%)%)%)%)%)%)%,%
+%home,%(%else-then(%if-no(%is_home%,,%(%home%)%)%,%(%if-no(%is_home%,,%(%else-then(%getenv(HTTPD_USER_HOME)%,%(%else-then(%getenv(HOME)%,%(/home)%)%)%)%)%)%)%)%)%,%
 %Home,%(%else-then(%if-no(%is_home%,,%(%Home%)%)%,%(%if-no(%is_home%,,%(%home%)%)%)%)%)%,%
 %HOME,%(%else-then(%HOME%,%(%toupper(%Home%)%)%)%)%,%
 %home,%(%else-then(%_home%,%(%tolower(%Home%)%)%)%)%,%
@@ -122,7 +122,7 @@
 %if(%UserName%,%(%
 %%if(%Home%,%(
 #########################################################################
-# Alias /%HomeAlias%/
+# /%HomeAlias%/
 # ...
 Alias /%HomeAlias%/ "%Home%/"
 <Directory "%Home%/">
@@ -132,14 +132,14 @@ Alias /%HomeAlias%/ "%Home%/"
     Allow from all
 </Directory>
 # ...
-# Alias /%HomeAlias%/
+# /%HomeAlias%/
 #########################################################################
 %)%)%%
 %)%)%%
 %%if(%UserName%,%(%
 %%if(%Source%,%(
 #########################################################################
-# Alias /%SourceAlias%/
+# /%SourceAlias%/
 # ...
 Alias /%SourceAlias%/ "%Source%/"
 <Directory "%Source%/">
@@ -149,48 +149,14 @@ Alias /%SourceAlias%/ "%Source%/"
     Allow from all
 </Directory>
 # ...
-# Alias /%SourceAlias%/
+# /%SourceAlias%/
 #########################################################################
 )%)%%
 %)%)%%
-%%parse(%Framework%,;,,,,%(
-#########################################################################
-# Alias /%Alias%/
-# ...
-Alias /%Alias%/ "%Source%/%Alias%/"
-<Directory "%Source%/%Alias%/">
-    Options Indexes MultiViews FollowSymLinks
-    AllowOverride AuthConfig
-    Order allow,deny
-    Allow from all
-</Directory>
-# ScriptAlias /%Alias%-build/
-# ...
-ScriptAlias /%Alias%-build/ "%Source%/%Alias%/build/"
-<Directory "%Source%/%Alias%/build/">
-#    PassEnv LD_LIBRARY_PATH
-#    PassEnv DYLD_LIBRARY_PATH
-    PassEnv HTTPD_HOST
-    PassEnv HTTPD_USER
-    PassEnv HTTPD_USER_HOME
-    SetEnv HOST %Host%
-    SetEnv USER %User%
-    SetEnv HOME %Home%
-    Options  FollowSymLinks
-    AllowOverride AuthConfig
-    Order allow,deny
-    Allow from all
-</Directory>
-# ...
-# ScriptAlias /%Alias%-build/
-# ...
-# Alias /%Alias%/
-#########################################################################
-)%,Alias)%%
 %%if(%UserName%,%(%
 %%if(%Build%,%(
 #########################################################################
-# ScriptAlias /%BuildAlias%/
+# /%BuildAlias%/
 # ...
 ScriptAlias /%BuildAlias%/ "%Build%/"
 <Directory "%Build%/">
@@ -208,10 +174,40 @@ ScriptAlias /%BuildAlias%/ "%Build%/"
     Allow from all
 </Directory>
 # ...
-# ScriptAlias /%BuildAlias%/
+# /%BuildAlias%/
 #########################################################################
 )%)%%
 %)%)%%
+%%parse(%Framework%,;,,,,%(
+#########################################################################
+# /%Alias%/
+# ...
+Alias /%Alias%/ "%Source%/%Alias%/"
+<Directory "%Source%/%Alias%/">
+    Options Indexes MultiViews FollowSymLinks
+    AllowOverride AuthConfig
+    Order allow,deny
+    Allow from all
+</Directory>
+ScriptAlias /%Alias%-cgi/ "%Source%/build/%Alias%/bin/"
+<Directory "%Source%/build/%Alias%/bin/">
+#    PassEnv LD_LIBRARY_PATH
+#    PassEnv DYLD_LIBRARY_PATH
+    PassEnv HTTPD_HOST
+    PassEnv HTTPD_USER
+    PassEnv HTTPD_USER_HOME
+    SetEnv HOST %Host%
+    SetEnv USER %User%
+    SetEnv HOME %Home%
+    Options  FollowSymLinks
+    AllowOverride AuthConfig
+    Order allow,deny
+    Allow from all
+</Directory>
+# ...
+# /%Alias%/
+#########################################################################
+)%,Alias)%%
 %
 </IfModule>
 #########################################################################

@@ -85,7 +85,7 @@
 %File,%(%else-then(%File%,%(%file%)%)%)%,%
 %FILE,%(%else-then(%FILE%,%(%toupper(%File%)%)%)%)%,%
 %file,%(%else-then(%_File%,%(%tolower(%File%)%)%)%)%,%
-%title,%(%else-then(%title%,%(%if-then(%Os%, specific )%%Makefile%%then-if(%if-then(%Extension%, file)%, .)%%then-if(%Framework%, for )%)%)%)%,%
+%title,%(%else-then(%title%,%(%if-then(%else-then(%Os%,%(Os)%)%, specific )%%Makefile%%then-if(%if-then(%Extension%, file)%, .)%%then-if(%Framework%, for )%)%)%)%,%
 %Title,%(%else-then(%Title%,%(%title%)%)%)%,%
 %TITLE,%(%else-then(%TITLE%,%(%toupper(%Title%)%)%)%)%,%
 %title,%(%else-then(%_Title%,%(%tolower(%Title%)%)%)%)%,%
