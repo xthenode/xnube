@@ -14,10 +14,10 @@
 === or otherwise) arising in any way out of the use of this software, 
 === even if advised of the possibility of such damage.
 ===
-===   File: Xthenode-apache-httpd-conf.html
+===   File: Xthenode-apache-httpd-conf-alias.html
 ===
 === Author: $author$
-===   Date: 4/12/2020
+===   Date: 8/9/2020
 =====================================================================
 -->
 <html>
@@ -27,7 +27,7 @@
     =====================================================================
     -->
     <head>
-        <title>Xthenode - Apache .conf</title>
+        <title>Xthenode - Apache .conf Alias</title>
 
         <!--
         =====================================================================
@@ -49,7 +49,7 @@
         -->
         <script type="text/javascript" src="../js/Xthenode.js"></script>
         <script type="text/javascript">
-            onLocationInit('Xthenode.html', 'Xthenode-apache-httpd-conf.html');
+            onLocationInit('Xthenode.html', 'Xthenode-apache-httpd-conf-alias.html');
         </script>
     </head>
     <!--
@@ -97,8 +97,8 @@
         =====================================================================
         -->
         <ul class="menubar">
-            <li><a href="Xthenode-apache-httpd-conf.html">Apache .conf</a></li>
             <li><a href="Xthenode-apache-httpd-conf-alias.html">Apache .conf Alias</a></li>
+            <li><a href="Xthenode-apache-httpd-conf.html">Apache .conf</a></li>
             <li><a href="Xthenode-apache-tools.html">Apache Tools</a></li>
             <li><a href="Xthenode-tools.html">Tools</a></li>
             <li class="home"><div><a href="Xthenode.html">Home</a></div></li>
@@ -109,15 +109,15 @@
         === form
         =====================================================================
         -->
-        <form name="Form" method="POST" action="../templates/t/Apache/httpd-conf.t"
+        <form name="Form" method="POST" action="../templates/t/Apache/httpd-conf-alias.t"
          onSubmit="return setFormSubmit(getFormValue2('FormTemplate','FormAction','Form'),getFormValue('FormMethod','Form'),'Form')">
             <div class="form">
 
-            File: <input name="File" value=""></input>[httpd][.conf]
-            <input type="checkbox" name="is_File" value="no" unchecked="checked">no</input>
+            File: <input name="File" value="httpd-local.conf"></input>[httpd-local.conf]
+            <input type="checkbox" name="is_File" value="no" checked="checked">no</input>
             <br/>
             Template: <select name="FormTemplate">
-            <option value="../templates/t/Apache/httpd-conf.t">httpd .conf</option>
+            <option value="../templates/t/Apache/httpd-conf-alias.t">Apache .conf Alias</option>
             <option value=""></option>
             <option value="../templates/t/t/functions.t">t functions</option>
             <option value="../templates/t/t/parameters.t">t parameters</option>
@@ -128,30 +128,32 @@
             <br/>
 
             <br/>
-            <b></b>Host:<input name="Host" value=""/><b></b>
-            <input type="checkbox" name="is_HostName" value="no" checked="checked">no</input><br/>
-            <b></b>User:<input name="User" value=""/><b></b>
-            <input type="checkbox" name="is_UserName" value="no" checked="checked">no</input><br/>
-            <b></b>Group:<input name="Group" value=""/><b></b>
-            <input type="checkbox" name="is_GroupName" value="no" checked="checked">no</input><br/>
-            
+            <b></b>Framework:<input name="Framework" value="framework"/><b></b>
+            <input type="checkbox" name="is_Framework" value="no" checked="checked">no</input>
             <br/>
-            <b></b>ServerName:<input name="ServerName" value=""/><b></b>
-            <input type="checkbox" name="is_ServerName" value="no" checked="checked">no</input><br/>
-            <b></b>ServerAdmin:<input name="ServerAdmin" value=""/><b></b>
-            <input type="checkbox" name="is_ServerAdmin" value="no" checked="checked">no</input><br/>
 
             <br/>
-            <b></b>Home:<input name="Home" value=""/><b></b>
-            <input type="checkbox" name="is_Home" value="no" unchecked="checked">no</input><br/>
-            <b></b>Source:<input name="Source" value=""/><b></b>
-            <input type="checkbox" name="is_Source" value="no" unchecked="checked">no</input><br/>
-            <b></b>Build:<input name="Build" value=""/><b></b>
-            <input type="checkbox" name="is_Build" value="no" unchecked="checked">no</input><br/>
-
+            <b>Alias</b>&nbsp;&nbsp;<b>/</b><input name="Alias" value="framework"/><b>/</b>
+            &nbsp;&nbsp;<b>"</b><input name="Alias_path" value="/home/user/source/framework/" size="40"/><b>"</b>
+            <input type="checkbox" name="is_Alias" value="no" unchecked="checked">no</input>
             <br/>
-            <b></b>Framework:<input name="Framework" value=""/><b></b>
-            <input type="checkbox" name="is_Framework" value="no" unchecked="checked">no</input><br/>
+            <b>&lt;Directory</b>&nbsp;&nbsp;<b>"</b><input name="Directory" value="/home/user/source/framework/" size="40"/><b>"&gt;</b>
+            <input type="checkbox" name="is_Directory" value="no" checked="checked">no</input>
+            <br/><b>&lt;/Directory&gt;</b><br/>
+            <br/>
+            <b>ScriptAlias</b>&nbsp;&nbsp;<b>/</b><input name="ScriptAlias" value="framework-cgi"/><b>/</b>
+            &nbsp;&nbsp;<b>"</b><input name="ScriptAlias_path" value="/home/user/source/framework/build/" size="40"/><b>"</b>
+            <input type="checkbox" name="is_ScriptAlias" value="no" checked="checked">no</input>
+            <br/>
+            <b>&lt;Directory</b>&nbsp;&nbsp;<b>"</b><input name="ScriptDirectory" value="/home/user/source/framework/build" size="40"/><b>"&gt;</b>
+            <input type="checkbox" name="is_ScriptDirectory" value="no" checked="checked">no</input>
+            <br/>&nbsp;&nbsp;&nbsp;&nbsp;<b>PassEnv </b><input name="PassEnv_HTTPD_HOST" value="HTTPD_HOST"/>
+            <input type="checkbox" name="is_PassEnv_HTTPD_HOST" value="no" checked="checked">no</input>
+            <br/>&nbsp;&nbsp;&nbsp;&nbsp;<b>PassEnv </b><input name="PassEnv_HTTPD_USER" value="HTTPD_USER"/>
+            <input type="checkbox" name="is_PassEnv_HTTPD_USER" value="no" checked="checked">no</input>
+            <br/>&nbsp;&nbsp;&nbsp;&nbsp;<b>PassEnv </b><input name="PassEnv_HTTPD_USER_HOME" value="HTTPD_USER_HOME"/>
+            <input type="checkbox" name="is_PassEnv_HTTPD_USER_HOME" value="no" checked="checked">no</input>
+            <br/><b>&lt;/Directory&gt;</b><br/>
 
             <br/>
             Content-Type: <select name="content_type">
@@ -163,7 +165,7 @@
             <option value=""></option>
             </select><br/>
             Action: <select name="FormAction">
-            <option value="../templates/t/Apache/httpd-conf.t">httpd .conf</option>
+            <option value="../templates/t/Apache/httpd-conf-alias.t">Apache .conf Alias</option>
             <option value=""></option>
             <option value="../templates/t/t/functions.t">t functions</option>
             <option value="../templates/t/t/parameters.t">t parameters</option>
